@@ -86,11 +86,11 @@
 					<div class="row">
 						<div class="col-md-12">
 							<h4 class="border-b">Description</h4>
-							<p>{!! nl2br($listing->description) !!}</p>									
+							<p>{!! nl2br(strip_tags($listing->description)) !!}</p>									
 						</div>
 						<div class="col-md-12 margin-top-10">
 							<h4 class="border-b">Requirements</h4>
-							<p>{!! nl2br($listing->requirement) !!}</p>							
+							<p>{!! nl2br(($listing->requirement)) !!}</p>							
 						</div>
 						<div class="col-md-12 margin-top-10">
 							<h4 class="border-b">Contact Information</h4>

@@ -23,23 +23,28 @@
 							<th>DATE</th>
 							<th>PSP</th>
 							<th>AMOUNT</th>
-							<th>TRANSACTION</th>
+							<th>CODE</th>
 							<th>STATUS</th>
 						</tr>
 					</thead>
 					<tbody>
+					@if($deposits->count())
+						@foreach($deposits as $deposit)
+							<tr>
+								<td>{{ $deposit->created_at->format('l jS \\of F Y h:i:s A') }}</td>
+								<td>{{ $deposit->processor->name }}</td>
+								<td>${{ number_format($deposit->amount, 2) }}</td>
+								<td style="letter-spacing: 2px;">{{ $deposit->transaction }}</td>
+								<td>{{ $deposit->status }}</td>
+							</tr>
+						@endforeach
+					@else
 						<tr>
 							<td class="text-center" colspan="5">
 								<span>You don't have any deposit yet.</span> <a href="#" class="text-success">Make a deposit</a>
 							</td>
 						</tr>
-						<tr>
-							<td>2018/Jan/03</td>
-							<td>Wing</td>
-							<td><strong>$100</strong></td>
-							<td>xxxxxxxx</td>
-							<td>Pending</td>
-						</tr>
+					@endif
 					</tbody>
 				</table>
 			</div>

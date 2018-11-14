@@ -8,6 +8,16 @@ use Illuminate\Database\Eloquent\Model;
 
 class ListingPayment extends Model
 {
+	public function getStatusAttribute($value)
+	{
+		return $value == 1 ? 'complete' : 'pending';
+	}
+
+	public function getProcessAttribute()
+	{
+		return Listing::find($this->processor_id)->title;
+	}
+
     public function listing()
     {
         return $this->belongsTo(Listing::class);

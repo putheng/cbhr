@@ -149,6 +149,7 @@ return array(
     'App\\Providers\\ComposerServiceProvider' => $baseDir . '/app/Providers/ComposerServiceProvider.php',
     'App\\Providers\\EloquentServiceProvider' => $baseDir . '/app/Providers/EloquentServiceProvider.php',
     'App\\Providers\\EventServiceProvider' => $baseDir . '/app/Providers/EventServiceProvider.php',
+    'App\\Providers\\FacebookServiceProvider' => $baseDir . '/app/Providers/FacebookServiceProvider.php',
     'App\\Providers\\RouteServiceProvider' => $baseDir . '/app/Providers/RouteServiceProvider.php',
     'App\\Rules\\CurrentPassword' => $baseDir . '/app/Rules/CurrentPassword.php',
     'App\\Rules\\DepositTransactionExists' => $baseDir . '/app/Rules/DepositTransactionExists.php',

@@ -19,7 +19,9 @@ class ListingController extends Controller
     
     public function show(Request $request, Listing $listing)
     {
-        $listing->increment('views');
+        if($request->query('ref')){
+            $listing->increment('views');
+        }
         return view('home.listing', compact('listing'));
     }
 

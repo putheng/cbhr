@@ -18,19 +18,19 @@
 							<th>DATE</th>
 							<th>PSP</th>
 							<th>AMOUNT</th>
-							<th>CODE</th>
+							<th>TRANSACTION</th>
 							<th>STATUS</th>
 						</tr>
 					</thead>
 					<tbody>
-						@if($deposits->count())
-							@foreach($deposits as $deposit)
+						@if($transactions->count())
+							@foreach($transactions as $transaction)
 								<tr>
-									<td>{{ $deposit->created_at->format('l jS \\of F Y h:i:s A') }}</td>
-									<td>{{ $deposit->processor->name }}</td>
-									<td>${{ number_format($deposit->amount, 2) }}</td>
-									<td style="letter-spacing: 2px;">{{ $deposit->transaction }}</td>
-									<td>{{ $deposit->status }}</td>
+									<td>{{ $transaction->created_at->format('l jS \\of F Y h:i:s A') }}</td>
+									<td>{{ $transaction->process }}</td>
+									<td>${{ number_format($transaction->amount, 2) }}</td>
+									<td style="letter-spacing: 2px;">{{ $transaction->transaction }}</td>
+									<td>{{ $transaction->status }}</td>
 								</tr>
 							@endforeach
 						@else

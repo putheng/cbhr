@@ -17,6 +17,11 @@ class Deposit extends Model
     {
         return $query->where('user_id', $user->id);
     }
+
+    public function getProcessAttribute()
+    {
+        return $this->processor_id == 1 ? 'Wing' : 'Truemoney';
+    }
     
     public function user()
     {

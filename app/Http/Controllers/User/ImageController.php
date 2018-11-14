@@ -18,7 +18,7 @@ class ImageController extends Controller
     {
         $cover = public_path('images/cover.png');
         
-        $logo = $company->avatarPath();
+        $logo = public_path($company->avatarPath());
         
         $img = Image::make($cover)->insert($logo, 'center');
         

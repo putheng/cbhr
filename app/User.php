@@ -87,7 +87,7 @@ class User extends Authenticatable
     
     public function listingPayment()
     {
-        return $this->hasMany(ListingPayment::class, 'listing_payments');
+        return $this->hasMany(ListingPayment::class, 'user_id', 'id');
     }
     
     public function deposit()

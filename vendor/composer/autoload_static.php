@@ -629,6 +629,7 @@ class ComposerStaticInitf1025739bbaa98da743211b47b5cf302
         'App\\Providers\\ComposerServiceProvider' => __DIR__ . '/../..' . '/app/Providers/ComposerServiceProvider.php',
         'App\\Providers\\EloquentServiceProvider' => __DIR__ . '/../..' . '/app/Providers/EloquentServiceProvider.php',
         'App\\Providers\\EventServiceProvider' => __DIR__ . '/../..' . '/app/Providers/EventServiceProvider.php',
+        'App\\Providers\\FacebookServiceProvider' => __DIR__ . '/../..' . '/app/Providers/FacebookServiceProvider.php',
         'App\\Providers\\RouteServiceProvider' => __DIR__ . '/../..' . '/app/Providers/RouteServiceProvider.php',
         'App\\Rules\\CurrentPassword' => __DIR__ . '/../..' . '/app/Rules/CurrentPassword.php',
         'App\\Rules\\DepositTransactionExists' => __DIR__ . '/../..' . '/app/Rules/DepositTransactionExists.php',
