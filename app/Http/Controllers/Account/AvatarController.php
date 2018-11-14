@@ -31,7 +31,7 @@ class AvatarController extends Controller
         
         $imageFile = $processedImage->__toString();
         
-        Storage::disk('s3')->put('images'. $path, $imageFile);
+        Storage::disk('public_dir')->put('avatar'. $path, $imageFile);
         
         $image = new Image;
         $image->path = $path;

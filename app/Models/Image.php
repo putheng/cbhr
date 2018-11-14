@@ -19,6 +19,6 @@ class Image extends Model
 
     public function path()
     {
-        return config('image.path.cloud') . $this->path;
+        return config('image.path.public') . $this->path;
     }
 }

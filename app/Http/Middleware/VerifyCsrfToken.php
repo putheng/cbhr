@@ -13,6 +13,6 @@ class VerifyCsrfToken extends BaseVerifier
      */
     protected $except = [
         '/login/facebook/callback',
-        '/listings/addscount'
+        '/listings/reload'
     ];
 }

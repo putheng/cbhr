@@ -11,8 +11,10 @@
 |
 */
 
+
 Route::get('/test', function(){
-    
+
+
 });
 
 Route::get('/privacy', 'PrivacyController@privacy');
