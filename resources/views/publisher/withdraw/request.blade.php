@@ -4,7 +4,7 @@
 <div id="page-wrapper">
 	<div class="col-md-12 graphs">
 		<div class="xs">
-			<h3>Withdraw Request</h3>
+			<h3>Make Request</h3>
 			@include ('users.employer.listing.partials.alert')
 			<div class="well1 white">
     			<div class="row wrapper text-center">

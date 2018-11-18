@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Models\Listing;
+use App\Models\{Listing, Category, Area};
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Api\ListingsResource;
@@ -46,4 +46,21 @@ class ListingController extends Controller
     {
         return new ListingsResource(Listing::isLive()->latestFirst()->isNotExpired()->paginate(300));
     }
+
+    public function json(Request $request)
+    {
+        $id = $request->id ? $request->id : 1;
+        $content = file_get_contents('https://hrload-putheng.c9users.io/?url=admin/api/'. $id);
+
+        //$json = json_decode($content, JSON_UNESCAPED_SLASHES);
+        $json = json_decode($content);
+
+        $category = $json->listing->category;
+        $title = $json->listing->title;
+
+        $area = Area::whereNotNull('parent_id')->get();
+    }
+
+
+
 }

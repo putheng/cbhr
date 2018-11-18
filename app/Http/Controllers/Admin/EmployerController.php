@@ -10,7 +10,7 @@ class EmployerController extends Controller
 {
     public function show(Request $request)
     {
-        $users = Role::getUser(2)->paginate(10);
+        $users = Role::getUser(4)->paginate(10);
         
         return view('admin.employer.show', compact('users'));
     }

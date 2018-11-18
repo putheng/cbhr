@@ -35,9 +35,10 @@ Route::group(['as' => 'home.'], function(){
 
 Auth::routes();
 
-Route::group(['prefix' => '/login/facebook', 'middleware' => 'guest'], function(){
-    Route::get('/', 'FacebookLoginController@login')->name('facebook.login');
-    Route::get('/callback', 'FacebookLoginController@handleLogin')->name('facebook.login.callback');
+/* facebook */
+Route::group(['prefix' => '/login/facebook', 'middleware' => 'guest', 'as' => 'facebook.'], function(){
+    Route::get('/', 'FacebookLoginController@login')->name('login');
+    Route::get('/callback', 'FacebookLoginController@handleLogin')->name('login.callback');
 });
 
 Route::get('/profile/picture', 'HomeController@avatar')->name('avatar.show');
@@ -51,7 +52,7 @@ Route::group(['prefix' => 'employers', 'namespace' => 'User'], function(){
 
 Route::get('/employers/{company}', 'CompanyController@show')->name('company.show');
 
-/**** Listing page ***/
+/**** Listing section ***/
 Route::group(['prefix' => 'listings', 'namespace' => 'Listings', 'as' => 'listing.'], function(){
    Route::get('/', 'ListingController@index')->name('index');
    Route::get('/filter', 'ListingController@filter')->name('search');
@@ -66,17 +67,20 @@ Route::group(['middleware' => 'auth', 'namespace' => 'Account'], function(){
 
 });
 
+/* publisher  */
 Route::group(['middleware' => ['auth', 'role:publisher'], 'prefix' => 'publisher', 'namespace' => 'Publisher', 'as' => 'publisher.'], function(){
     Route::get('/', 'DashboardController@index')->name('index');
     Route::get('/settings/profile', 'DashboardController@profile')->name('profile');
     Route::patch('/settings/profile', 'DashboardController@store');
     
+    /* publisher/promote */
     Route::group(['prefix' => 'promote', 'as' => 'promote.'], function(){
         Route::get('/', 'PostController@index')->name('index');
         Route::get('/create', 'PostController@create')->name('create');
         Route::post('/create/{listing}', 'PostController@store')->name('store');
     });
     
+    /* publisher/payment */
     Route::group(['prefix' => 'payment', 'as' => 'withdraw.'], function(){
         Route::get('/', 'PaymentController@transaction')->name('transaction');
         Route::get('/request', 'PaymentController@index')->name('index');
@@ -87,10 +91,13 @@ Route::group(['middleware' => ['auth', 'role:publisher'], 'prefix' => 'publisher
     
 });
 
+
+/* Admin section*/
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['auth', 'role:admin'], 'as' => 'admin.'], function(){
     
     Route::get('/', 'AdminController@home')->name('index');
     
+    /* admin/listing */
     Route::group(['as' => 'listing.', 'prefix' => 'listing'], function(){
         Route::get('/', 'ListingController@index')->name('index');
         Route::get('/expire', 'ListingController@expire')->name('expire');
@@ -99,14 +106,34 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['aut
         Route::post('/create', 'CreateListingController@store')->name('create.store');
     });
     
+    /* admin/employer  */
     Route::group(['as' => 'employer.', 'prefix' => 'employer'], function(){
-        Route::get('/', 'EmployerController@show')->name('index');    
+        Route::get('/', 'EmployerController@show')->name('index');
+        /* admin/employer/payment */
+        Route::get('/payment', 'PaymentController@index')->name('payment');   
+    });
+
+    /* admin/payment */
+    Route::group(['as' => 'payment.', 'prefix' => 'payment'], function(){
+
+        /* admin/payment/deposit */
+        Route::group(['prefix' => 'deposit', 'as' => 'deposit.'], function(){
+            Route::post('/{deposit}/approve', 'DepositController@approve')->name('approve');
+            Route::post('/{deposit}/cancel', 'DepositController@cancel')->name('cancel');
+        });
     });
     
+    /* admin/publisher */
     Route::group(['as' => 'publisher.', 'prefix' => 'publisher'], function(){
-        Route::get('/', 'PublisherController@show')->name('index');    
+        Route::get('/', 'PublisherController@show')->name('index');
+
+        /* admin/publisher/withdraw */
+        Route::get('/withdraw', 'WithdrawController@index')->name('withdraw');
+        Route::post('/withdraw/{withdraw}/approve', 'WithdrawController@approve')->name('withdraw.approve');
+        Route::post('/withdraw/{withdraw}/reject', 'WithdrawController@cancel')->name('withdraw.cancel');
     });
     
+    /* admin/accoutn */
     Route::group(['as' => 'account.', 'prefix' => 'account'], function(){
         Route::get('/password', 'PasswordController@index')->name('password');    
         Route::patch('/password', 'PasswordController@store');
@@ -122,12 +149,15 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['aut
     });
 });
 
+/* Employer section */
 Route::group(['prefix' => 'employer', 'namespace' => 'User', 'middleware' => ['auth', 'role:employer,admin'], 'as' => 'employer.'], function(){
     Route::get('/', 'EmployerController@index')->name('index');
     
+    /* employer/listing */
     Route::group(['prefix' => 'listing', 'namespace' => 'Listing', 'as' => 'listing.'], function(){
         Route::get('/', 'ListingController@show')->name('published');
         
+        /* employer/listing/create */
         Route::get('create', 'CreateListingController@show')->name('create');
         Route::post('create', 'CreateListingController@store');
         
@@ -147,6 +177,7 @@ Route::group(['prefix' => 'employer', 'namespace' => 'User', 'middleware' => ['a
         
     });
     
+    /* employer/application */
     Route::group(['prefix' => 'application', 'namespace' => 'Applications', 'as' => 'application.'], function(){
         Route::get('/', 'ApplicationsController@show')->name('show');
         
@@ -157,6 +188,7 @@ Route::group(['prefix' => 'employer', 'namespace' => 'User', 'middleware' => ['a
         Route::post('/rejected', 'RejectedApplicationsController@store');
     });
     
+    /* employer/resume */
     Route::group(['prefix' => 'resume', 'namespace' => 'Resume', 'as' => 'resume.'], function(){
         Route::get('/', 'ResumeController@show')->name('browse');
         
@@ -170,6 +202,7 @@ Route::group(['prefix' => 'employer', 'namespace' => 'User', 'middleware' => ['a
         Route::post('search', 'SearchResumeController@store');
     });
     
+    /* employer/payment */
     Route::group(['prefix' => 'payment', 'namespace' => 'Payment', 'as' => 'payment.'], function(){
         Route::get('/', 'PaymentController@show')->name('show');
         
@@ -179,6 +212,7 @@ Route::group(['prefix' => 'employer', 'namespace' => 'User', 'middleware' => ['a
         Route::post('deposit', 'DepositPaymentController@store');
     });
     
+    /* employer/profile */
     Route::group(['prefix' => 'profile', 'namespace' => 'Profile', 'as' => 'profile.'], function(){
         Route::get('/', 'ProfileController@show')->name('show');
         Route::post('/', 'ProfileController@store');
@@ -201,7 +235,8 @@ Route::group(['prefix' => 'employer', 'namespace' => 'User', 'middleware' => ['a
 
 Route::group(['prefix' => 'api/v3', 'namespace' => 'Api'], function(){
     Route::get('listings', 'ListingController@listing');
-    
     Route::get('listing/{listing}', 'ListingController@index');
+
+    Route::get('json', 'ListingController@json');
 });
 

@@ -4,7 +4,7 @@
 <div id="page-wrapper">
 	<div class="col-md-12 graphs">
 		<div class="xs">
-			<h3>Withdraw Transactions</h3>
+			<h3>All Transactions</h3>
 			@include ('users.employer.listing.partials.alert')
 			
 			<div class="well1 white">
@@ -45,7 +45,7 @@
 			    	        			<td>{{ $withdraw->processor }}</td>
 			    	        			<td>{{ $withdraw->amounts }}</td>
 			    	        			<td>{{ $withdraw->created }}</td>
-			    	        			<td>{{ $withdraw->status }}</td>
+			    	        			<td>{{ $withdraw->withdrawStatus }}</td>
 			    	        		</tr>
 		    	        		@endforeach
     	        			@else

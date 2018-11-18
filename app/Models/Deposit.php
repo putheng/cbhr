@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use App\User;
-use App\Models\Processor;
+use App\Models\{Processor, Company};
 use Illuminate\Database\Eloquent\Model;
 use App\Traits\Eloquent\OrderableTrait;
 
@@ -11,7 +11,7 @@ class Deposit extends Model
 {
     use OrderableTrait;
     
-    protected $fillable = ['amount'];
+    protected $fillable = ['amount', 'status'];
     
     public function scopeFromUser($query, User $user)
     {
@@ -47,4 +47,5 @@ class Deposit extends Model
     {
         return $this->belongsTo(Processor::class);
     }
+
 }

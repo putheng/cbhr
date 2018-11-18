@@ -301,6 +301,7 @@ class AreaTableSeeder extends Seeder
 			[
 				'name' => 'Phnom Penh',
 				'children' => [
+					['name' => 'Phnom Penh'],
 					['name' => 'Chamkarmon'],
 					['name' => 'Daun Penh'],
 					['name' => 'Prampir Makara'],

@@ -37,13 +37,24 @@
 		<br>
 		<div class="emre-response text-center"></div>
 		<div class="row">
-			<div class="col-md-4 pull-right text-center">
+			<div class="col-md-12 pull-right text-center">
 			    {{ csrf_field() }}
-				<button type="submit" class="btn btn-primary" style="padding:10px 45px;">Submit</button>
+				<button type="submit" class="btn btn-primary" style="padding:10px 45px;">Login</button>
 				<br>
-				<p class="h5">Or <a href="{{ url('/register') }}" class="text-primary">Create Account</a></p>
+				<p class="h5">
+					Or <a href="{{ url('/register') }}" class="text-primary">Create Account</a>
+				</p>
 			</div>
-		<div class="clearfix"></div>
+			<div class="clearfix"></div>
+		</div>
+		<div class="row">
+			<div class="col-md-12 text-center">
+
+				<br>
+				<a href="{{ route('facebook.login') }}" class="btn btn-primary">
+					Login with Facebook as Publisher
+				</a>
+			</div>
 		</div>
 		<div class="clearfix"></div>		
 		<br>

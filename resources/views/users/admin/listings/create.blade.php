@@ -230,7 +230,7 @@
 		
 		$(document).ready(function(){
 			setTimeout( function () {
-		        $('.form-floating').submit();
+		        $('.form-floatingxx').submit();
 		    }, 1000);
 			
 		});
@@ -242,7 +242,7 @@
 		
 		$(document).ready(function(){
 			setTimeout( function () { 
-		        $('.form-floating').submit();
+		        $('.form-floatingxx').submit();
 		    }, 500);
 			
 		});

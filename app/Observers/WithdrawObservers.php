@@ -16,5 +16,6 @@ class WithdrawObservers
     public function deleted(Withdraw $withdraw)
     {
         $withdraw->user()->increment('usd', $withdraw->amount);
+        $withdraw->update(['status' => 'cancel']);
     }
 }

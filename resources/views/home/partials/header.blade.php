@@ -33,7 +33,8 @@
 							@if(auth()->check())
 								<a href="{{ url(role_url()) }}" class="login-trigger btn btn-primary custom-back-color">Account</a>
 							@else
-								<button type="button" class="login-trigger btn btn-primary custom-back-color" data-toggle="modal" data-target="#login-modal">LOG IN</button>
+								<a href="{{ url('/login') }}" class="login-trigger btn btn-primary custom-back-color">Lgoin</a>
+								<!---<button type="button" class="login-trigger btn btn-primary custom-back-color" data-toggle="modal" data-target="#login-modal">LOG IN</button>-->
 							@endif
 						</li>
 					</ul>

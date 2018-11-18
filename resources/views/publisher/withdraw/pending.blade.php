@@ -4,7 +4,7 @@
 <div id="page-wrapper">
 	<div class="col-md-12 graphs">
 		<div class="xs">
-			<h3>Withdraw Requested</h3>
+			<h3>Pending requests</h3>
 			@include ('users.employer.listing.partials.alert')
 			
 			<div class="well1 white">
@@ -46,9 +46,9 @@
 			    	        			<td>{{ $withdraw->processor }}</td>
 			    	        			<td>{{ $withdraw->amounts }}</td>
 			    	        			<td>{{ $withdraw->created_at }}</td>
-			    	        			<td>{{ $withdraw->status }}</td>
+			    	        			<td>{{ ucfirst($withdraw->status) }}</td>
 			    	        			<td>
-			    	        				<a onclick="event.preventDefault(); document.getElementById('withdraw-destroy-form-{{ $withdraw->id }}').submit();" href="#">Cancel</a>
+			    	        				<a onclick="destroyRequest('{{ $withdraw->id }}')" href="#">Cancel</a>
 			    	        				<form action="{{ route('publisher.withdraw.destroy', [$withdraw]) }}" method="post" id="withdraw-destroy-form-{{ $withdraw->id }}">
 											    {{ csrf_field() }}
 											    {{ method_field('DELETE') }}
@@ -80,6 +80,13 @@
 @endsection
 
 @section('script')
-
-
+<script type="text/javascript">
+    function destroyRequest(id)
+    {
+        if(confirm('Are you sure you want to delete this request ?')){
+            event.preventDefault();
+            document.getElementById('withdraw-destroy-form-'+ id).submit();
+        }
+    }
+</script>
 @endsection

@@ -10,7 +10,13 @@ class UnpublishedListingController extends Controller
 {
     public function show(Request $request)
     {
-        $listings = $request->user()->listings()->with(['area'])->isNotLive()->latestFirst()->paginate(10);
+        $listings = $request->user()
+        		->listings()
+        		->with(['area'])
+        		->isNotLive()
+        		->latestFirst()
+        		->paginate(10);
+
         return view('users.employer.listing.unpublished', compact('listings'));
     }
     

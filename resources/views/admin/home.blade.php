@@ -39,7 +39,7 @@
 					</div>
 				</div>
 			</div>
-			<a href="#users-jobseekers">
+			<a href="{{ route('admin.publisher.index') }}">
 				<div class="panel-footer gray-gradient">
 					<span class="pull-left">View Details</span>
 					<span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -61,7 +61,7 @@
 					</div>
 				</div>
 			</div>
-			<a href="#users-employers">
+			<a href="{{ route('admin.employer.index') }}">
 				<div class="panel-footer gray-gradient">
 					<span class="pull-left">View Details</span>
 					<span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -83,7 +83,7 @@
 					</div>
 				</div>
 			</div>
-			<a href="#jobs-applications">
+			<a href="#">
 				<div class="panel-footer gray-gradient">
 					<span class="pull-left">View Details</span>
 					<span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -117,7 +117,7 @@
 			<div class="panel-body">
 				<div class="list-group">
 				    @foreach($listings as $listing)
-    					<a target="_blank" href="{{ route('listing.show', $listing) }}" class="list-group-item">
+    					<a target="_blank" href="{{ route('listing.show', $listing) }}?ref" class="list-group-item">
     						<i class="fa fa-list-alt"></i>
     						    {{ $listing->title }}
     						<span class="pull-right text-muted small">
@@ -127,11 +127,80 @@
     					</a>
 					@endforeach
 				</div>
-				<a href="#jobs-list" class="btn btn-default btn-block">View All</a>
+				<a href="{{ route('admin.listing.index') }}" class="btn btn-default btn-block">View All</a>
 			</div>
 		</div>
 	</div>
 </div>
 
+@endsection
+
+@section('script')
+<script src="/js/admin/excanvas.min.js"></script>
+<script src="/js/admin/jquery.flot.min.js"></script>
+ 
+ 
+<script type="text/javascript">
+$(function () {
+    var data1 = [
+    	[0, "0"],[4, "0"],[8, 3],[12, "0"],[16, 3],[20, 1],[24, 5],[28, "0"]
+    ];
+    var data2 = [
+    	[1, 1],[5, "0"],[9, "0"],[13, "0"],[17, "0"],[21, "0"],[25, "0"],[29, 1]
+    ];
+	var data3 = [
+    	[2, 1],[6, 1],[10, 3],[14, 1],[18, "0"],[22, "0"],[26, 2],[30, "0"]
+    ];
+	
+	var ticks = [
+    	[0, "December 31"],[4, "January 6"],[8, "January 7"],[12, "January 27"],
+    	[16, "September 17"],[20, "September 19"],[24, "April 29"],[28, "May 13"]
+    ];
+	
+	var y_ticks = [
+    	[0, "0"],[1, "1"],[2, "2"],[3, "3"],[4, "4"],[5, "5"]
+    ];
+ 
+    var data = [{
+        label: "New Jobs",
+        data: data1,
+        bars: 
+		{
+			barWidth: 0.8,
+			show: true
+		}
+    },{
+        label: "Jobseekers",
+        data: data2,
+        bars:
+		{
+		  barWidth: 0.8,
+          show:true
+        }
+    },{
+        label: "Employers",
+        data: data3,
+        bars:
+		{
+		  barWidth: 0.8,
+          show:true
+        }
+    }];
+ 
+    var options = {
+        xaxis: {
+            ticks: ticks
+        },
+		yaxis: {
+            ticks: y_ticks
+        },
+        grid:{
+            backgroundColor: {colors: ["#969696", "#5C5C5C"] }
+        }
+    };
+ 
+    var plot = $.plot($("#flot-bar-chart"), data, options);  
+});
+</script>
 
 @endsection

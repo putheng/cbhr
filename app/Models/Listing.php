@@ -110,6 +110,11 @@ class Listing extends Model
         return $query->where('live', false);
     }
 
+    public function scopeIsNotLiveWithTrushed($query)
+    {
+        return $query->where('live', false)->orWhereNotNull('deleted_at');
+    }
+
     public function scopeIsExpired($query)
     {
         return $query->where('expires_at', '<=', Carbon::now());

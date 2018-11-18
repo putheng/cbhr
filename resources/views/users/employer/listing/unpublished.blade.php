@@ -23,7 +23,7 @@
 								<tr>
 									<th scope="row">{{ $listing->id }}</th>
 									<td>
-										<a href="#">{{ $listing->title }}</a>
+										<a target="_blank" href="{{ route('listing.show', $listing) }}">{{ $listing->title }}</a>
 										<small>({{ $listing->created_at->diffForHumans() }})</small>
 									</td>
 									<td>{{ optional($listing->area->parent)->name }} &nbsp; > &nbsp;

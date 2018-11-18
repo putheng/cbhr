@@ -65,7 +65,7 @@
     					<td class="oMain">{{ $listing->created_at->diffForHumans() }}</td>
     					<td class="oMain">{{ $listing->expires_at }}</td>
     					<td>
-    					    <a href="{{ route('listing.show', $listing) }}" target="_blank">{{ $listing->title }}</a>
+    					    <a href="{{ route('listing.show', $listing) }}?ref" target="_blank">{{ $listing->title }}</a>
     					</td>
     					<td>{{ $listing->category->name }}</td>
     					<td>

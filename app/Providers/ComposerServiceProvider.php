@@ -13,6 +13,8 @@ use App\Http\ViewComposers\{
     UserListingViewsComposer
 };
 
+use App\Http\ViewComposers\Admin\{CountUser};
+
 class ComposerServiceProvider extends ServiceProvider
 {
     /**
@@ -43,6 +45,8 @@ class ComposerServiceProvider extends ServiceProvider
             ],
             FeaturedJobs::class
         );
+
+        View::composer('admin.home', CountUser::class);
     }
 
     /**

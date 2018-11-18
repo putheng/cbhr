@@ -100,15 +100,51 @@
 					<a class="f-level" id="link_users"  href="#"><i class="fa fa-user fa-fw"></i> Employer<span class="fa arrow"></span></a>
 					<ul class="nav nav-second-level" >
 						<li >
-							<a class="s-level"  href="{{ route('admin.employer.index') }}">Employers</a>
+							<a class="s-level"  href="{{ route('admin.employer.index') }}">
+								Employers
+							</a>
+						</li>
+						<li >
+							<a class="s-level"  href="{{ route('admin.employer.payment') }}">
+								Payment
+							</a>
 						</li>
 					</ul>
 				</li>
 				<li>
 					<a class="f-level" id="link_users"  href="#"><i class="fa fa-user fa-fw"></i> Publishers<span class="fa arrow"></span></a>
 					<ul class="nav nav-second-level" >
+						<li>
+							<a class="s-level"  href="{{ route('admin.publisher.index') }}">
+								Publishers
+							</a>
+						</li>
 						<li >
-							<a class="s-level"  href="{{ route('admin.publisher.index') }}">Publishers</a>
+							<a class="s-level"  href="{{ route('admin.publisher.withdraw') }}">
+								Withdraw request
+							</a>
+						</li>
+					</ul>
+				</li>
+				<li>
+					<a class="f-level" id="link_settings"  href="#">
+						&nbsp;<i class="fa fa-gears fa-usd"></i> Payment<span class="fa arrow"></span>
+					</a>
+					<ul class="nav nav-second-level" >
+						<li>
+							<a class="s-level"  href="">
+								Transfer
+							</a>
+						</li>
+						<li>
+							<a class="s-level"  href="">
+								Approve
+							</a>
+						</li>
+						<li>
+							<a class="s-level"  href="">
+								Cancel
+							</a>
 						</li>
 					</ul>
 				</li>
@@ -116,7 +152,7 @@
 					<a class="f-level" id="link_settings"  href="#"><i class="fa fa-gears fa-fw"></i> Settings<span class="fa arrow"></span></a>
 					<ul class="nav nav-second-level" >
 						<li ><a class="s-level"  href="{{ route('admin.impersonate.index') }}">Impersonate</a></li>
-						<li ><a class="s-level"  href="#settings-payments">Payments</a></li>
+						<li ><a class="s-level"  href="{{ route('admin.employer.payment') }}">Payments</a></li>
 						<li ><a class="s-level"  href="#settings-feeds">Job Feeds</a></li>
 						<li ><a class="s-level"  href="#settings-categories">Job Categories</a></li>
 						<li ><a class="s-level"  href="#settings-locations">Locations</a></li>

@@ -42,7 +42,7 @@ class PaymentController extends Controller
     
     public function transaction(Request $request)
     {
-        $withdraws = $request->user()->withdraw()->latestFirst()->paginate(15);
+        $withdraws = $request->user()->withdraw()->withTrashed()->latestFirst()->paginate(15);
         
         return view('publisher.withdraw.transaction', compact('withdraws'));
     }

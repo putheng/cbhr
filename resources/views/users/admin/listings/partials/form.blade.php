@@ -1,20 +1,20 @@
 <div class="form-group{{ $errors->has('category') ? ' has-error' : '' }}">
 	<label class="control-label">Category : {{ $listing['category'] }}</label>
 	<select name="category" class="form-control1">
-		<option value="{{ $listing['category'] }}">{{ $listing['category'] }}</option>
-		<!--@foreach($categories as $category)-->
+		<option value="{{ getCategory($listing['title'], $listing['category'])->id }}">{{ getCategory($listing['title'], $listing['category'])->name }}</option>
+		<@foreach($categories as $category)
 			
-		<!--	<optgroup label="{{ $category->name }}">-->
-		<!--		<option value="{{ $category->id }}">{{ $category->name }}</option>-->
-		<!--		@foreach($category->children as $child)-->
-		<!--			@if($listing['category'] == $child->name)-->
-		<!--				<option selected="selected" value="{{ $child->id }}">{{ $child->name }}</option>-->
-		<!--			@else-->
-		<!--				<option value="{{ $child->id }}">{{ $child->name }}</option>-->
-		<!--			@endif-->
-		<!--		@endforeach-->
-		<!--	</optgroup>-->
-		<!--@endforeach-->
+			<optgroup label="{{ $category->name }}">
+				<option value="{{ $category->id }}">{{ $category->name }}</option>
+				@foreach($category->children as $child)
+					@if($listing['category'] == $child->name)
+						<option selected="selected" value="{{ $child->id }}">{{ $child->name }}</option>
+					@else
+						<option value="{{ $child->id }}">{{ $child->name }}</option>
+					@endif
+				@endforeach
+			</optgroup>
+		@endforeach
 	</select>
 	@if($errors->has('category'))
 		<span class="help-block">{{ $errors->first('category') }}</span>
@@ -146,21 +146,20 @@
 </div>
 
 <div class="form-group{{ $errors->has('location') ? ' has-error' : '' }}">
-	<label class="control-label">Locations : {{ $listing['location'] }} </label>
+	<label class="control-label">Locations : {{ $company['address'] }} </label>
 	<select name="location" class="form-control1">
-		<option value="{{ $listing['location'] }}">{{ $listing['location'] }}</option>
-		<!--@foreach($areas as $area)-->
-		<!--	<optgroup label="{{ $area->name }}">-->
-		<!--		<option value="{{ $area->id }}">{{ $area->name }}</option>-->
-		<!--		@foreach($area->children as $child)-->
-		<!--			@if($listing['location'] == $child->name)-->
-		<!--				<option selected="selected" value="{{ $child->id }}">{{ $child->name }}</option>-->
-		<!--			@else-->
-		<!--				<option value="{{ $child->id }}">{{ $child->name }}</option>-->
-		<!--			@endif-->
-		<!--		@endforeach-->
-		<!--	</optgroup>-->
-		<!--@endforeach-->
+		@foreach($areas as $area)
+			<optgroup label="{{ $area->name }}">
+				<option value="{{ $area->id }}">{{ $area->name }}</option>
+				@foreach($area->children as $child)
+					@if($listing['location'] == $child->name)
+						<option selected="selected" value="{{ $child->id }}">{{ $child->name }}</option>
+					@else
+						<option value="{{ $child->id }}">{{ $child->name }}</option>
+					@endif
+				@endforeach
+			</optgroup>
+		@endforeach
 	</select>
 	@if($errors->has('location'))
 		<span class="help-block">{{ $errors->first('location') }}</span>

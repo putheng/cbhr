@@ -13,7 +13,8 @@ class SalaryTableSeeder extends Seeder
     public function run()
     {
         $salaries = [
-			['name' => '<$200'],
+			['name' => 'Negotiable'],
+            ['name' => '<$200'],
 			['name' => '$200-$500'],
 			['name' => '$500-$999'],
 			['name' => '$1000-$2000'],

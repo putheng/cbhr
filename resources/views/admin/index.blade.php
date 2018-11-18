@@ -41,6 +41,8 @@
 		<script src="{{ asset('js/admin/bootstrap.min.js') }}"></script>
 		<script src="{{ asset('js/admin/metisMenu.min.js') }}"></script>
 		<script src="{{ asset('js/admin/admin.js') }}"></script>
+		@yield('script')
 		<div id="ContextMenuContainer"></div>
+
 	</body>
 </html>

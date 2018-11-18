@@ -11,7 +11,6 @@ use App\Events\Admin\CompleteListing;
 use App\Models\{
     Company, Listing, Image, CompanyType,
     EmployeeType, Category, Area
-
 };
 use App\Http\Requests\Listing\ListingFormRequest;
 
@@ -72,7 +71,7 @@ class CreateListingController extends Controller
             	$img = str_replace(' ', '+', $img);
             	$data = base64_decode($img);
                 
-                Storage::disk('s3')->put('images'. $path, $data);
+                Storage::disk('public_dir')->put('avatar'. $path, $data);
                 
                 $image = new Image;
                 $image->path = $path;
@@ -85,23 +84,19 @@ class CreateListingController extends Controller
                 
                 $user->giveRoleTo('employer');
             }
-            
-            $checkCategory = Category::where('name', $request->category)->get();
-        
-            $categoryid = $checkCategory->count() ? $checkCategory->first()->id : Category::create(['name' => $request->category])->id;
         
             $listing = new Listing;
             $listing->title     = $request->title;
             
             $listing->term_id   = $request->term;
-            $listing->category_id = $categoryid;
+            $listing->category_id = $request->category;
             $listing->level_id  = $request->level;
             $listing->experience_id = $request->experience;
             $listing->salary_id     = $request->salary;
             $listing->education_id     = $request->education;
             $listing->gender_id     = $request->gender;
             $listing->age_id     = $request->experience;
-            $listing->area_id     = Area::where('name', $request->location)->count() ? Area::where('name', $request->location)->first()->id : Area::firstOrCreate(['name' => $request->location])->id;
+            $listing->area_id     = $request->location;
             $listing->description     = $request->description;
             $listing->requirement     = $request->requirement;
             $listing->publish     = $request->start .'/'. $request->closing;
@@ -131,4 +126,5 @@ class CreateListingController extends Controller
         
         return redirect()->route('admin.listing.create', ['id' => $ids])->withError('Not create');
     }
+
 }

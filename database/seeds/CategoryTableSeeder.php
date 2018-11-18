@@ -30,6 +30,7 @@ class CategoryTableSeeder extends Seeder
                     ['name' => 'Human Resources'],
                     ['name' => 'Secretarial'],
                     ['name' => 'Top Management'],
+                    ['name' => 'Translation/Interpretation'],
                 ]
             ],
             [

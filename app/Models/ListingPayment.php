@@ -10,12 +10,12 @@ class ListingPayment extends Model
 {
 	public function getStatusAttribute($value)
 	{
-		return $value == 1 ? 'complete' : 'pending';
+		return $value == 1 ? 'Complete' : 'Pending';
 	}
 
 	public function getProcessAttribute()
 	{
-		return Listing::find($this->processor_id)->title;
+		return Listing::withTrashed()->find($this->processor_id)->title;
 	}
 
     public function listing()

@@ -1,4 +1,56 @@
 <?php
+if(!function_exists('getCategory')){
+    function getCategory($title, $category)
+    {
+        $query = App\Models\Category::whereNotNull('parent_id')->get();
+
+        $filter = $query->where('name', $category);
+
+        $count = $filter->count();
+
+        if($count == 0){
+
+            $explode = array_map('strtolower', explode('/', $category));
+            $collect = collect();
+
+            foreach($explode as $key => $value){
+                $q = App\Models\Category::whereNotNull('parent_id')
+                            ->where('name', 'LIKE', '%'. $value .'%')
+                            ->get();
+                if($q->count()){
+                    $collect = $collect->merge($q);
+                }
+            }
+
+            if($collect->count()){
+                $category = $collect->first();
+            }else{
+                $explode = array_map('strtolower', explode('-', str_slug($title)));
+
+                foreach($explode as $key => $value){
+                    $q = App\Models\Category::whereNotNull('parent_id')
+                                ->where('name', 'LIKE', '%'. $value .'%')
+                                ->get();
+                    if($q->count()){
+                        $collect = $collect->merge($q);
+                    }
+                }
+
+                if($collect->count()){
+                    $category = $collect->first();
+                }else{
+                    $category = App\Models\Category::find(108);
+                }
+
+            }
+
+        }elseif($count >= 1){
+            $category = $filter->first();
+        }
+
+        return $category;
+    }
+}
 
 if(!function_exists('post_today')){
     function post_start($format = 'Y-m-d'){

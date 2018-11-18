@@ -13,7 +13,11 @@ class ListingController extends Controller
     public function index(Request $request)
     {
         $listings = Listing::with('company', 'category')
-        ->isNotExpired()->isLive()->latestFirst()->filter($request)->paginate(20);
+            ->isNotExpired()
+            ->isLive()
+            ->latestFirst()
+            ->filter($request)
+            ->paginate(20);
         
         return view('admin.listings.index', compact('listings'));
     }
@@ -21,7 +25,10 @@ class ListingController extends Controller
     public function expire(Request $request)
     {
         $listings = Listing::with('company', 'category')
-        ->isExpired()->latestFirst()->filter($request)->paginate(20);
+            ->isExpired()
+            ->latestFirst()
+            ->filter($request)
+            ->paginate(20);
         
         return view('admin.listings.expire', compact('listings'));
     }
@@ -29,7 +36,10 @@ class ListingController extends Controller
     public function unpublish(Request $request)
     {
         $listings = Listing::with('company', 'category')
-        ->isNotLive()->latestFirst()->filter($request)->paginate(20);
+            ->isNotLive()
+            ->latestFirst()
+            ->filter($request)
+            ->paginate(20);
         
         return view('admin.listings.unpublish', compact('listings'));
     }

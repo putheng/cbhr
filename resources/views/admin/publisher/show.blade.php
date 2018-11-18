@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="fright">
-	<a class="small-tile green-back" href="index.php?category=users&amp;action=new_employer">
+	<a class="small-tile green-back" href="">
 		<img class="hide-sm pull-right" width="32" src="{{ asset('images/icons/default.png') }}">
 		<h3 class="h3-tile">Add a new employer</h3>
 	</a>
@@ -13,7 +13,6 @@
 <br>
 <div style="float:right">
 	<form action="index.php" method="post">
-		<input type="hidden" name="category" value="users"><input type="hidden" name="action" value="employers">
 		Search in 
 		<select name="comboSearch" class="table-combo-search">
 			<option value="id">id</option>
@@ -44,7 +43,7 @@
     					<td>{{ $user->name }}</td>
     					<td>{{ $user->email }}</td>
     					<td>{{ number_format($user->usd, 2) }}</td>
-    					<td>{{ $user->password }}</td>
+    					<td>{{ $user->publisher->phone }}</td>
     					<td>
     					    <a href="">
     					        <img border="0" src="{{ asset('images/active_1.gif') }}">

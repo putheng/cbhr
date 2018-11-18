@@ -7,10 +7,11 @@ use App\Models\{
     Deposit, Image, Post, Withdraw,
     Publisher
 };
-use Illuminate\Notifications\Notifiable;
+use App\Model\Admin\DepositAction;
 use App\Traits\Permissions\HasPermissionsTrait;
-use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
@@ -58,7 +59,7 @@ class User extends Authenticatable
     {
         $usd = ($this->usd - $this->price);
         
-        if($usd < 0){
+        if($usd <= 0){
             return false;
         }
         

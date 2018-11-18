@@ -15,10 +15,12 @@ class EventServiceProvider extends ServiceProvider
     protected $listen = [
         'App\Events\Listing\UserCompletedListingPayment' => [
             'App\Listeners\Listing\StoreUserCompleteListingPayment',
-            //'App\Listeners\Listing\ListingFacebookPost',
         ],
         'App\Events\Admin\CompleteListing' => [
-            //'App\Listeners\Admin\FacebookPostListing',
+            //
+        ],
+        'App\Events\Admin\DepositApprovedEvent' => [
+            'App\Listeners\Admin\DepositApproval'
         ],
         'App\Events\Employer\DepositSubmited' => [
             'App\Listeners\Employer\SMSAdminDepositSubmited',

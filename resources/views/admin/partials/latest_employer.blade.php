@@ -35,7 +35,7 @@
 						</table>
 					</div>
 				</div>
-				<a href="#users-employers" class="btn btn-default btn-block">View All</a>
+				<a href="{{ route('admin.employer.index') }}" class="btn btn-default btn-block">View All</a>
 			</div>
 		</div>
 	</div>

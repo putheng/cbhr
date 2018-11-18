@@ -10,7 +10,12 @@ class ExpiredListingController extends Controller
 {
     public function show(Request $request)
     {
-        $listings = $request->user()->listings()->with(['area'])->isExpired()->latestFirst()->paginate(15);
+        $listings = $request->user()
+        		->listings()
+        		->with(['area'])
+        		->isExpired()
+        		->latestFirst()
+        		->paginate(15);
         
         return view('users.employer.listing.expired', compact('listings'));
     }

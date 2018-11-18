@@ -23,6 +23,11 @@ class Withdraw extends Model
     {
         $query->where('status', $status);
     }
+
+    public function getWithdrawStatusAttribute()
+    {
+        return $this->deleted_at == null ? ucfirst($this->status) : 'Cancel';
+    }
     
     public function getAmountsAttribute()
     {
