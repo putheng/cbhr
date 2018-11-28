@@ -3,71 +3,19 @@
 use Illuminate\Http\Request;
 use App\Models\Area;
 
-Route::get('/testb', function(){
-    $string = 'Building #40D, Street 352, Sangkat Beong Keng Kang 1, Khan Chamkarmorn, Phnom Penh, Cambodia';
+Route::get('/test', function(){
+    $string = 'B Building #40D, Street 352, Sangkat Beong Keng Kang 1, Khan Chamkarmorn, Phnom Penh, Cambodia  ';
     echo $string .'<hr>';
-
-    $area = Area::getLocation($string);
-
-    echo $area->getChildren()->name;
-
-    echo $area->getParent()->name;
-});
-
-Route::get('/test', function(Request $request){
-    $string = 'B2-109, B2-110, Diamond Island, Sangkat Tonle Bassac, Khan Chamkarmon, (0.02 mi) Phnom Penh';
-    echo $string .'<hr>';
-
 
     $area = Area::get();
 
     $parent_filter = $area->filter(function($area, $key){
-        return $area->parent_id == null;
-    });
+            return $area->parent_id == null;
+        })->pluck('name')->toArray();
 
-    $parents = $parent_filter->pluck('name')->toArray();
+        $filter_split = filter_split($parent_filter, $string, 3);
 
-    dd(filter_split($parents, $string, 1));
-
-    $array = [];
-    foreach($parents as $parent){
-        $parent_split = str_split($parent, 2);
-
-        $count = 0;
-        foreach ($parent_split as $value) {
-            if(strpos($string, $value) !== false){
-                $count++;
-            }
-        }
-        $array[$parent] = $count;
-    }
-    arsort($array);
-
-    $collect = collect($array);
-
-    $first = $collect->first();
-
-    $filters = $collect->filter(function($value, $key) use ($first){
-        return $value == $first;
-    });
-
-    if($filters->count() > 1){
-        foreach($filters as $key => $filter){
-            $split_filter = str_split($key, 3);
-            $count = 0;
-            $second = [];
-            foreach ($split_filter as $value) {
-                if(strpos($string, $value) !== false){
-                    $count++;
-                }
-                $second[$key] = $count;
-            }
-        }
-        dd($second);
-    }else{
-        echo 1;
-    }
-
+    dd($filter_split);
 });
 
 Route::get('/privacy', 'PrivacyController@privacy');

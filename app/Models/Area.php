@@ -29,7 +29,7 @@ class Area extends Model
 	        return $area->parent_id == null;
 	    })->pluck('name')->toArray();
 
-	    $filter_split = filter_split($parent_filter, $string, 2);
+	    $filter_split = filter_split($parent_filter, $string, 3);
 	    $parent = array_keys($filter_split)[0];
 
 	    $id = $area->filter(function($area, $key) use ($parent){
@@ -39,7 +39,7 @@ class Area extends Model
 	    $child = $area->where('parent_id', $id)
 	            ->pluck('name')
 	            ->toArray();
-	    $filter_split_child = filter_split_child($child, $string, 2);
+	    $filter_split_child = filter_split_child($child, $string, 3);
 	    $children = array_keys($filter_split_child)[0];
 
 	    $this->childrens = $area->where('name', $children)->first();
