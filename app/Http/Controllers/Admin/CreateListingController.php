@@ -25,14 +25,16 @@ class CreateListingController extends Controller
         
         $listing = $json['listing'];
         $company = $json['company'];
+
+        $location = Area::getLocation($company['address']);
         
-        return view('users.admin.listings.create', compact(['listing', 'company', 'id']));
+        return view('users.admin.listings.create', compact(['listing', 'company', 'id', 'location']));
     }
     
     public function store(Request $request)
     {
         
-        if(!empty($request->logoimg) && !empty($request->phone)
+        if(!empty($request->phone)
         && !empty($request->address) && !empty($request->description)
         && !empty($request->requirement)
         ){
@@ -65,22 +67,29 @@ class CreateListingController extends Controller
                 
                 $company->save();
                 
-                $path = '/' . uniqid(true) . '.png';
-                
-                $img = str_replace('data:image/jpg;base64,', '', $request->logoimg);
-            	$img = str_replace(' ', '+', $img);
-            	$data = base64_decode($img);
-                
-                Storage::disk('public_dir')->put('avatar'. $path, $data);
-                
-                $image = new Image;
-                $image->path = $path;
-                $image->user()->associate($company);
-                $image->save();
-                
-                $user->company()->update([
-                    'logo_id' => $image->id,
-                ]);
+
+                if(empty($request->logoimg)){
+                    $user->company()->update([
+                        'logo_id' => 39,
+                    ]);
+                }else{
+                    $path = '/' . uniqid(true) . '.png';
+                    
+                    $img = str_replace('data:image/jpg;base64,', '', $request->logoimg);
+                	$img = str_replace(' ', '+', $img);
+                	$data = base64_decode($img);
+                    
+                    Storage::disk('public_dir')->put('avatar'. $path, $data);
+                    
+                    $image = new Image;
+                    $image->path = $path;
+                    $image->user()->associate($company);
+                    $image->save();
+                    
+                    $user->company()->update([
+                        'logo_id' => $image->id,
+                    ]);
+                }
                 
                 $user->giveRoleTo('employer');
             }

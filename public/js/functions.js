@@ -132,12 +132,16 @@ function reload_items(selected_location,type,selected_value){
 
 }
 
-function loadToken(token){
+function fill_dropdownMenu(token, csrf, loadToken){
 	setTimeout(function () {
-        $.post('/listings/reload', {token:token}, function(response){
+        $.post('/listings/reload', {token:token, _token:csrf, loadToken:loadToken}, function(response){
             console.log(response);
-        });
-    }, 7000);
+        }).done(function() {
+			//console.log( "second success" );
+		}).fail(function() {
+			console.log('error');
+		});
+    }, 4000);
 }
 
 function fill_dropdown(text,type,selected_value,selected_location){

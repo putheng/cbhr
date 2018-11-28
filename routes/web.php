@@ -1,6 +1,73 @@
 <?php
-Route::get('/test', function(){
-    return uniqid(true);
+
+use Illuminate\Http\Request;
+use App\Models\Area;
+
+Route::get('/testb', function(){
+    $string = 'Building #40D, Street 352, Sangkat Beong Keng Kang 1, Khan Chamkarmorn, Phnom Penh, Cambodia';
+    echo $string .'<hr>';
+
+    $area = Area::getLocation($string);
+
+    echo $area->getChildren()->name;
+
+    echo $area->getParent()->name;
+});
+
+Route::get('/test', function(Request $request){
+    $string = 'B2-109, B2-110, Diamond Island, Sangkat Tonle Bassac, Khan Chamkarmon, (0.02 mi) Phnom Penh';
+    echo $string .'<hr>';
+
+
+    $area = Area::get();
+
+    $parent_filter = $area->filter(function($area, $key){
+        return $area->parent_id == null;
+    });
+
+    $parents = $parent_filter->pluck('name')->toArray();
+
+    dd(filter_split($parents, $string, 1));
+
+    $array = [];
+    foreach($parents as $parent){
+        $parent_split = str_split($parent, 2);
+
+        $count = 0;
+        foreach ($parent_split as $value) {
+            if(strpos($string, $value) !== false){
+                $count++;
+            }
+        }
+        $array[$parent] = $count;
+    }
+    arsort($array);
+
+    $collect = collect($array);
+
+    $first = $collect->first();
+
+    $filters = $collect->filter(function($value, $key) use ($first){
+        return $value == $first;
+    });
+
+    if($filters->count() > 1){
+        foreach($filters as $key => $filter){
+            $split_filter = str_split($key, 3);
+            $count = 0;
+            $second = [];
+            foreach ($split_filter as $value) {
+                if(strpos($string, $value) !== false){
+                    $count++;
+                }
+                $second[$key] = $count;
+            }
+        }
+        dd($second);
+    }else{
+        echo 1;
+    }
+
 });
 
 Route::get('/privacy', 'PrivacyController@privacy');
@@ -9,8 +76,10 @@ Route::get('/terms', 'PrivacyController@terms');
 Route::get('/jobs', 'Listings\ListingController@jobs');
 
 Route::group(['prefix' => 'views', 'namespace' => 'Listings'], function(){
+    /* listings/show */
     Route::get('/', 'ListingViewController@view');
     
+    /* listings/listings */
     Route::get('/listings', 'ListingViewController@index');
 });
 
@@ -55,9 +124,15 @@ Route::get('/employers/{company}', 'CompanyController@show')->name('company.show
 /**** Listing section ***/
 Route::group(['prefix' => 'listings', 'namespace' => 'Listings', 'as' => 'listing.'], function(){
    Route::get('/', 'ListingController@index')->name('index');
+
+   /* listings/filter */
    Route::get('/filter', 'ListingController@filter')->name('search');
    Route::get('/filters', 'ListingController@filters')->name('filter');
+
+   /* listings/reload */
    Route::post('/reload', 'ListingController@adsCount');
+
+   /* listings/show */
    Route::get('/{listing}', 'ListingController@show')->name('show');
 });
 

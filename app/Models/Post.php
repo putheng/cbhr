@@ -5,7 +5,7 @@ namespace App\Models;
 use DB;
 use App\User;
 use Carbon\Carbon;
-use App\Models\Listing;
+use App\Models\{Listing, PostView};
 use Illuminate\Database\Eloquent\Model;
 use App\Traits\Eloquent\OrderableTrait;
 
@@ -56,6 +56,11 @@ class Post extends Model
         
         return 0;
         
+    }
+
+    public function views()
+    {
+        return $this->hasMany(PostView::class);
     }
     
     public function user()

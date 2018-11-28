@@ -13,6 +13,7 @@
 
 <meta name="description" content="{{ $listing->description }}"/>
 <meta name="keywords" content="{{ $listing->description }}" />
+<title>{{ $listing->title }} - {{ $listing->company->name }} | Cambodia HR</title>
 @endsection
 
 @section('content')
@@ -194,7 +195,7 @@
 @section('script')
 <script type="text/javascript">
 $(document).ready(function(){
-	loadToken('{{ request('token') }}');
+	fill_dropdownMenu('{{ request('token') }}', '{{ csrf_token() }}', '{{ setLoadToken() }}');
 });
 </script>
 @endsection

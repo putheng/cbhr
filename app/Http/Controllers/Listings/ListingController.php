@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Listings;
 
-use App\Models\{Listing, Post};
+use App\Models\{Listing, Post, PostView};
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Contracts\Encryption\DecryptException;
@@ -35,8 +35,15 @@ class ListingController extends Controller
                 'listing_id' => $explode[0]
             ])->first();
 
-            if((bool)$post){
+            if((bool)$post && checkLoadToken($request->loadToken)){
                 $post->increment('views');
+
+                $view = new PostView;
+                $view->agent = $request->header('User-Agent');
+                $view->post()->associate($post);
+                $view->save();
+                
+                return 'ok';
             }
         }catch(DecryptException $e){
             // dd($e->getMessage());

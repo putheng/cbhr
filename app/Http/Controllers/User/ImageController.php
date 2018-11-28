@@ -11,7 +11,7 @@ class ImageController extends Controller
 {
     public function __construct()
     {
-        Image::configure(array('driver' => 'imagick'));
+        //Image::configure(array('driver' => 'imagick'));
     }
     
     public function cover(Company $company)
