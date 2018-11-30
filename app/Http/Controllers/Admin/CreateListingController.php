@@ -25,10 +25,16 @@ class CreateListingController extends Controller
         
         $listing = $json['listing'];
         $company = $json['company'];
-
-        $location = Area::getLocation($company['address']);
         
-        return view('users.admin.listings.create', compact(['listing', 'company', 'id', 'location']));
+        $address = $listing['location'];
+
+        $string = trim(preg_replace('/\s\s+/', ' ', $address));
+        $string = before(';', $string);
+
+        $location = Area::where('name', $string)->first() ?? Area::find(197);
+
+        return view('users.admin.listings.create', 
+            compact(['listing', 'company', 'id', 'location', 'description']));
     }
     
     public function store(Request $request)
@@ -70,7 +76,7 @@ class CreateListingController extends Controller
 
                 if(empty($request->logoimg)){
                     $user->company()->update([
-                        'logo_id' => 39,
+                        'logo_id' => 9,
                     ]);
                 }else{
                     $path = '/' . uniqid(true) . '.png';

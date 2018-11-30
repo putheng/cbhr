@@ -146,13 +146,13 @@
 </div>
 
 <div class="form-group{{ $errors->has('location') ? ' has-error' : '' }}">
-	<label class="control-label">Locations {{ $location->getParent()->name }} {{ $company['address'] }}</label>
+	<label class="control-label">Locations {{ $location->name }}</label>
 	<select name="location" class="form-control1">
 		@foreach($areas as $area)
 			<optgroup label="{{ $area->name }}">
-				<option value="{{ $area->id }}">{{ $area->name }}</option>
+				<option value="{{ $location->id }}">{{ $location->name }}</option>
 				@foreach($area->children as $child)
-					@if($listing['location'] == $child->name || $location->getChildren()->name == $child->name)
+					@if($listing['location'] == $child->name)
 						<option selected="selected" value="{{ $child->id }}">{{ $child->name }}</option>
 					@else
 						<option value="{{ $child->id }}">{{ $child->name }}</option>

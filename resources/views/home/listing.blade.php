@@ -27,9 +27,12 @@
 			<h2 class="no-margin">{{ $listing->title }}</h2>
 			<div class="icon-h5">
 				<h5><span class="glyphicon glyphicon-equalizer"></span> {{ $listing->company->name }}</h5>
-				<h5><span class="glyphicon glyphicon-map-marker"></span> 
-					{{ optional($listing->area->parent)->name }} &raquo 
+				<h5><span class="glyphicon glyphicon-map-marker"></span>
+				@if($listing->area->parent->count())
+					{{ $listing->area->parent->name }} &raquo {{ $listing->area->name }}
+				@else
 					{{ $listing->area->name }}
+				@endif
 				</h5>
 				<h5><span class="glyphicon glyphicon-time"></span>  {{ $listing->started }} => {{ $listing->closing }}</h5>
 			</div>
@@ -108,8 +111,8 @@
 									<tr>
 										<td><b>Email</b></td>
 										<td>
-											<div>cv@cambodiahr.com</div>
-											{!! email_protected($listing->user->email) !!}
+											<div>contact@cambodiahr.com</div>
+											{{-- {!! email_protected($listing->user->email) !!} --}}
 										</td>
 									</tr>
 									<tr>

@@ -3,21 +3,6 @@
 use Illuminate\Http\Request;
 use App\Models\Area;
 
-Route::get('/test', function(){
-    $string = 'B Building #40D, Street 352, Sangkat Beong Keng Kang 1, Khan Chamkarmorn, Phnom Penh, Cambodia  ';
-    echo $string .'<hr>';
-
-    $area = Area::get();
-
-    $parent_filter = $area->filter(function($area, $key){
-            return $area->parent_id == null;
-        })->pluck('name')->toArray();
-
-        $filter_split = filter_split($parent_filter, $string, 3);
-
-    dd($filter_split);
-});
-
 Route::get('/privacy', 'PrivacyController@privacy');
 Route::get('/terms', 'PrivacyController@terms');
 
@@ -46,7 +31,6 @@ Route::group(['as' => 'home.'], function(){
     Route::group(['prefix' => 'world', 'as' => 'world.', 'namespace' => 'Home'], function(){
         Route::get('/', 'WorldController@index');
     });
-
 });
 
 

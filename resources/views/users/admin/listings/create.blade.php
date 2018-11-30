@@ -38,7 +38,7 @@
 						
 						<div class="form-group{{ $errors->has('requirement') ? ' has-error' : '' }}">
 							<label class="control-label">Requirements :</label>
-							<textarea name="requirement" class="form-control1" style="height:100px;">{!! str_replace("<br/>", "\n", $listing['requirement']) !!}</textarea>
+							<textarea name="requirement" class="form-control1" style="height:100px;">{!! str_replace('<br />', '', nl2br(e($listing['requirement']))) !!}</textarea>
 							@if($errors->has('requirement'))
 								<span class="help-block">{{ $errors->first('requirement') }}</span>
 							@endif
@@ -46,7 +46,7 @@
 						
 						<div class="form-group{{ $errors->has('description') ? ' has-error' : '' }}">
 							<label class="control-label">Description :</label>
-							<textarea name="description" class="form-control1" style="height:100px;">{!! str_replace("<br/>", "\n", $listing['description']) !!}</textarea>
+							<textarea name="description" class="form-control1" style="height:100px;">{!! str_replace('<br />', '',nl2br(e($listing['description']))) !!}</textarea>
 							@if($errors->has('description'))
 								<span class="help-block">{{ $errors->first('description') }}</span>
 							@endif
@@ -145,7 +145,9 @@
 								<div class="form-group{{ $errors->has('employee') ? ' has-error' : '' }}">
 									<label class="control-label">Employee : {{ $company['employee'] }}</label>
 									<select name="employee" class="form-control1">
+									@if(!empty($company['employee']))
 										<option value="{{ $company['employee'] }}">{{ $company['employee'] }}</option>
+									@endif
 										@foreach(\App\Models\EmployeeType::get() as $child)
 											@if($company['type'] == $child->name)
 												<option selected="selected" value="{{ $child->id }}">{{ $child->name }}</option>
@@ -196,7 +198,7 @@
 						
 						<div class="form-group{{ $errors->has('companyDescription') ? ' has-error' : '' }}">
 							<label class="label-control">Description:</label>
-							<textarea class="form-control1" name="companyDescription">{!! str_replace("<br/>", "\n", $company['description']) !!}</textarea>
+							<textarea class="form-control1" name="companyDescription">{!! nl2br(e($company['description'])) !!}</textarea>
 							@if ($errors->has('companyDescription'))
 		                        <div class="help-block">
 		                            {{ $errors->first('companyDescription') }}
@@ -222,31 +224,15 @@
 <!-- /#page-wrapper -->
 @endsection
 @section('script')
+<script type="text/javascript" src="{{ asset('js/select2.min.js') }}"></script>
+<script type="text/javascript">
+	$('select').select2();
 	
-	<script type="text/javascript" src="{{ asset('js/select2.min.js') }}"></script>
-@if(session('success'))
-	<script type="text/javascript">
-		$('select').select2();
+	$(document).ready(function(){
+		setTimeout( function () {
+	        $('.form-floating').submit();
+	    }, {{ session()->has('success') ? '1000' : '500' }});
 		
-		$(document).ready(function(){
-			setTimeout( function () {
-		        $('.form-floatingxx').submit();
-		    }, 1000);
-			
-		});
-	</script>
-@endif
-@if(session('error'))
-	<script type="text/javascript">
-		$('select').select2();
-		
-		$(document).ready(function(){
-			setTimeout( function () { 
-		        $('.form-floatingxx').submit();
-		    }, 500);
-			
-		});
-	</script>
-@endif
-
+	});
+</script>
 @endsection
