@@ -1,0 +1,6 @@
+<IfModule mod_rewrite.c>
+RewriteEngine on
+# Redirect anything except images stroage subdomain
+RewriteCond %{HTTP_HOST} !^(images|storage)\.cambodiahr\.com [NC]
+RewriteRule ^(.*)$ new/public/$1 [L]
+</IfModule>

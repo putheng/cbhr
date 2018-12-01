@@ -21,4 +21,9 @@ class Image extends Model
     {
         return config('image.path.public') . $this->path;
     }
+
+    public function cover()
+    {
+        return config('image.path.cover') . $this->path;
+    }
 }

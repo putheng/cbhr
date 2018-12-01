@@ -2,7 +2,10 @@
 	<h4 class="aside-header">Featured Jobs</h4>
 	<hr class="top-bottom-margin">
 	@foreach($listings as $listing)
-		<div>			
+		<div>
+			<a class="jobDetail" href="">
+				<img align="left" src="{{ $listing->company->avatarPath() }}" width="50" alt="{{ $listing->company->name }}" class="img-shadow img-right-margin">
+			</a>		
 			<h5 class="no-margin">
 				<a class="jobDetail" href="{{ route('listing.show', $listing) }}">{{ $listing->title }}</a>
 			</h5>

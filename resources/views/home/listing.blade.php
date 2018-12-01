@@ -174,7 +174,10 @@
 		
 		@foreach($listing->relates() as $list)
 		<hr class="top-bottom-margin">
-		<div>			
+		<div>
+			<a class="jobDetail" href="">
+				<img align="left" src="{{ $listing->company->avatarPath() }}" width="50" alt="{{ $listing->company->name }}" class="img-shadow img-right-margin">
+			</a>
 			<h5 class="no-margin">
 				<a class="jobDetail" href="{{ route('listing.show', $list) }}">{{ $list->title }}</a>
 			</h5>

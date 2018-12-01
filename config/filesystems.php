@@ -57,7 +57,7 @@ return [
 
         'public_dir' => [
             'driver' => 'local',
-            'root' => public_path(),
+            'root' => '/home/u875511581/domains/cambodiahr.com/public_html/images/img',
             'url' => env('APP_URL').'/storage',
             'visibility' => 'public',
         ],

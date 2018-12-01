@@ -20,8 +20,10 @@ class AvatarController extends Controller
 
     public function store(StoreAvatarFormRequest $request)
     {
-        
-        $path = '/' . uniqid(true) . '.png';
+        $unique = uniqid(true);
+        $path = '/' . $unique . '.png';
+        $covername = '/' . $unique . '.jpg';
+        $cover_path = public_path('images/cover.png');
         
         $processedImage = $this->imageManager->make($request->file('image')->getPathName())
             ->resize(150, 150, function ($c) {
@@ -33,6 +35,11 @@ class AvatarController extends Controller
         
         Storage::disk('public_dir')->put('avatar'. $path, $imageFile);
         
+        $cover = $this->imageManager->make($cover_path)->insert($imageFile, 'center')->encode('jpeg')->stream();
+        $cover_file = $cover->__toString();
+
+        Storage::disk('public_dir')->put('cover'. $covername, $cover_file);
+
         $image = new Image;
         $image->path = $path;
         $image->user()->associate($request->user());

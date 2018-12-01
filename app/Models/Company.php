@@ -58,6 +58,15 @@ class Company extends Model
 
         return optional($this->avatar)->path();
     }
+
+    public function coverPath()
+    {
+        if (!$this->logo_id) {
+            return null;
+        }
+
+        return optional($this->avatar)->cover();
+    }
     
     public function user()
     {
