@@ -10,7 +10,7 @@
 				<form action="{{ route('employer.profile.show') }}" method="post">
 					{{ csrf_field() }}
 					<fieldset>
-						<avatar-upload endpoint="{{ route('account.avatar.store') }}" send-as="image" current-avatar="{{ Auth::user()->avatarPath() }}"></avatar-upload>
+						<avatar-upload endpoint="{{ route('account.store.avatar') }}" send-as="image" current-avatar="{{ Auth::user()->avatarPath() }}"></avatar-upload>
 						<br>
 		                <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
 		                    <label for="name" class="control-label">Name</label>

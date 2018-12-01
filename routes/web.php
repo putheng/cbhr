@@ -1,8 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
-use App\Models\Area;
-
 Route::get('/privacy', 'PrivacyController@privacy');
 Route::get('/terms', 'PrivacyController@terms');
 
@@ -69,7 +66,8 @@ Route::group(['prefix' => 'listings', 'namespace' => 'Listings', 'as' => 'listin
 });
 
 Route::group(['middleware' => 'auth', 'namespace' => 'Account'], function(){
-    Route::post('/account/avatar', 'AvatarController@store')->name('account.avatar.store');
+    Route::post('/account/company/logo', 'AvatarController@store')->name('account.avatar.store');
+    Route::post('/account/user/avatar', 'AvatarController@avatar')->name('account.store.avatar');
     Route::patch('/account', 'AccountController@update')->name('account.update');
 
 });

@@ -18,12 +18,43 @@ class AvatarController extends Controller
         $this->imageManager = $imageManager;
     }
 
+    public function avatar(StoreAvatarFormRequest $request)
+    {
+        $path = '/' . uniqid(true).time() . '.png';
+
+        $processedImage = $this->imageManager->make($request->file('image')->getPathName())
+            ->resize(150, 150, function ($c) {
+                $c->aspectRatio();
+            })
+            ->encode('png')->stream();
+        
+        $imageFile = $processedImage->__toString();
+        
+        Storage::disk('public_dir')->put('avatar'. $path, $imageFile);
+
+        $image = new Image;
+        $image->path = $path;
+        $image->user()->associate($request->user());
+        $image->save();
+        
+        return response([
+            'data' => [
+                'id' => $image->id,
+                'path' => $image->path(),
+            ]
+        ], 200);
+    }
+
     public function store(StoreAvatarFormRequest $request)
     {
-        $unique = uniqid(true);
+        $isEmployer = auth()->user()->hasRole('employer');
+
+        $unique = $isEmployer
+            ? auth()->user()->company->identifier.time()
+            : uniqid(true).time();
+
         $path = '/' . $unique . '.png';
         $covername = '/' . $unique . '.jpg';
-        $cover_path = public_path('images/cover.png');
         
         $processedImage = $this->imageManager->make($request->file('image')->getPathName())
             ->resize(150, 150, function ($c) {
@@ -35,10 +66,17 @@ class AvatarController extends Controller
         
         Storage::disk('public_dir')->put('avatar'. $path, $imageFile);
         
-        $cover = $this->imageManager->make($cover_path)->insert($imageFile, 'center')->encode('jpeg')->stream();
-        $cover_file = $cover->__toString();
+        if($isEmployer){
+            $cover_path = public_path('images/cover.png');
+            $cover = $this->imageManager
+                ->make($cover_path)
+                ->insert($imageFile, 'center')
+                ->encode('jpeg')->stream();
 
-        Storage::disk('public_dir')->put('cover'. $covername, $cover_file);
+            $cover_file = $cover->__toString();
+
+            Storage::disk('public_dir')->put('cover'. $covername, $cover_file);
+        }
 
         $image = new Image;
         $image->path = $path;

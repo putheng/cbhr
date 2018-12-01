@@ -13,6 +13,7 @@ use App\Models\{
     EmployeeType, Category, Area
 };
 use App\Http\Requests\Listing\ListingFormRequest;
+use Intervention\Image\ImageManagerStatic;
 
 class CreateListingController extends Controller
 {
@@ -79,7 +80,7 @@ class CreateListingController extends Controller
                         'logo_id' => 9,
                     ]);
                 }else{
-                    $path = '/' . uniqid(true) . '.png';
+                    $path = '/' . $user->company->identifier . '.png';
                     
                     $img = str_replace('data:image/jpg;base64,', '', $request->logoimg);
                 	$img = str_replace(' ', '+', $img);
@@ -87,6 +88,15 @@ class CreateListingController extends Controller
                     
                     Storage::disk('public_dir')->put('avatar'. $path, $data);
                     
+                    $cover_path = public_path('images/cover.png');
+                    $cover = ImageManagerStatic::make($cover_path)
+                        ->insert($data, 'center')
+                        ->encode('jpeg')->stream();
+
+                    $cover_file = $cover->__toString();
+
+                    Storage::disk('public_dir')->put('cover'. $path, $cover_file);
+
                     $image = new Image;
                     $image->path = $path;
                     $image->user()->associate($company);

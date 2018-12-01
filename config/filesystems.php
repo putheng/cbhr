@@ -57,7 +57,7 @@ return [
 
         'public_dir' => [
             'driver' => 'local',
-            'root' => '/home/u875511581/domains/cambodiahr.com/public_html/images/img',
+            'root' => env('APP_ENV') == 'production' ? '/home/u875511581/domains/cambodiahr.com/public_html/images/img' : public_path(),
             'url' => env('APP_URL').'/storage',
             'visibility' => 'public',
         ],

@@ -4,7 +4,7 @@
 <meta property="og:url"           content="{{ route('listing.show', $listing) }}" />
 <meta property="og:title"         content="{{ $listing->title }} | {{ $listing->company->name }}" />
 <meta property="og:description"   content="{{ $listing->description }}" />
-<meta property="og:image"         content="{{ route('company.cover.cover', $listing->company) }}" />
+<meta property="og:image"         content="{{ $listing->company->coverPath() }}" />
 
 <meta property="fb:pages" content="1545494539067929" />
 <meta property="fb:admins" content="1738174996470831" />
