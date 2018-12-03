@@ -11,6 +11,11 @@ class Processor extends Model
     
     protected $fillable = ['name', 'minimum', 'recipient', 'code_length'];
     
+    public function scopeIslive($query)
+    {
+    	return $query->where('code_length', true);
+    }
+
     public function deposit()
     {
         return $this->hasMany(Deposit::class);

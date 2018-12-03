@@ -10,7 +10,8 @@ use App\Http\ViewComposers\{
     CompanyCarouselViewComposer,
     NavigationViewComposer,
     FeaturedJobs,
-    UserListingViewsComposer
+    UserListingViewsComposer,
+    ProcessorsComposer
 };
 
 use App\Http\ViewComposers\Admin\{CountUser};
@@ -47,6 +48,8 @@ class ComposerServiceProvider extends ServiceProvider
         );
 
         View::composer('admin.home', CountUser::class);
+
+        View::composer('users.employer.payment.deposit', ProcessorsComposer::class);
     }
 
     /**

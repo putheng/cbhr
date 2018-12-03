@@ -8,15 +8,16 @@
 			<div class="well1 white">
 				<form action="{{ route('employer.payment.deposit') }}" method="post">
 					{{ csrf_field() }}
-					<h5 class="{{ $errors->has('processor') ? 'text-danger' : 'text-success' }}">Processor </h5>
+					<h5>Please choose your preferred payment method </h5>
 					<hr style="margin-top:0;"/>
 					<ul class="no-margin list-inline processor">
-						@foreach(\App\Models\Processor::get() as $processor)
-							<li>
+						@foreach($processors as $key => $processor)
+							<li class="text-center m-r-xs">
 								<input {!! old('processor') ==  $processor->id ? 'checked' : '' !!} id="{{ $processor->name }}" type="radio" name="processor" value="{{ $processor->id }}" class="hidden style">
 								<label for="{{ $processor->name }}">
 									<img src="/images/checking.png" class="checking">
 									<img src="/images/{{ strtolower($processor->name) }}.png" width="70" height="70" class="opacity">
+									<p class="h5">{{ $processor->recipient }}</>
 								</label>
 							</li>
 						@endforeach
@@ -25,11 +26,11 @@
 						<span class="help-block text-danger">{{ $errors->first('processor') }}</span>
 					@endif
 					<br><br>
-					<h5 class="{{ $errors->has('amount') ? 'text-danger' : 'text-success' }}">Amount</h5>
+					<h5>Amount</h5>
 					<hr style="margin-top:0;"/>
 					<div class="row">
 						<div class="col-sm-7">
-							<div class="input-group{{ $errors->has('amount') ? ' has-error' : '' }}">
+							<div class="input-group">
 								<span class="input-group-addon">$</span>
 								<input value="{{ old('amount') }}" style="letter-spacing: 3px; font-weight: bold;" autocomplete="off" placeholder="00" type="text" class="form-control1" name="amount">
 								<span class="input-group-addon">.00</span>
@@ -42,7 +43,7 @@
 					<br>
 					
 					<div class="form-group">
-						<label class="control-label h5 {{ $errors->has('transaction') ? 'text-danger' : 'text-success' }}">Transaction Code</label>
+						<label class="control-label h5">Transaction Code</label>
 						<hr style="margin-top:0;"/>
 						<div class="row">
 							<div class="col-sm-7">
@@ -68,13 +69,29 @@
 					</div>
 						
 					<hr>
-					
 					<p>
-						<button type="submit" class="btn btn-primary">
-							<i class="fa fa-arrow-circle-o-down"></i>
-							&nbsp;&nbsp;SUBMIT&nbsp;&nbsp;
-						</button>
+						@if($errors->has('terms'))
+							<strong class="h6 text-danger">{{ $errors->first('terms') }}</strong><br>
+						@endif
+						<label for="term">
+							<input id="term" type="checkbox" name="terms">
+							I agree to the <a href="{{ route('terms') }}" target="_blank">terms and conditions</a>
+						</label>
 					</p>
+					<p>
+						@if($errors->has('disclaimer'))
+							<strong class="h6 text-danger">{{ $errors->first('disclaimer') }}</strong><br>
+						@endif
+						<label for="disclaimer">
+							<input id="disclaimer" type="checkbox" name="disclaimer">
+							I agree that CambodiaHR.com will not refund any payments due to low/zero conversions or profit from a campaign.
+						</label>
+					</p>
+					<br>
+					<button type="submit" class="btn btn-primary">
+						<i class="fa fa-arrow-circle-o-down"></i>
+						&nbsp;&nbsp;SUBMIT&nbsp;&nbsp;
+					</button>
 				
 				</form>
 			</div>

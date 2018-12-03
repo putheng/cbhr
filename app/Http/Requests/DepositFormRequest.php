@@ -28,7 +28,9 @@ class DepositFormRequest extends FormRequest
     {
         return [
             'processor' => 'required|exists:processors,id',
-            'amount'    => 'required|numeric|min:10|max:1500',
+            'amount'    => 'required|numeric|min:10|max:500',
+            'disclaimer' => 'required',
+            'terms' => 'required',
             'transaction' => [
                 'required',
                 'numeric',
@@ -41,8 +43,10 @@ class DepositFormRequest extends FormRequest
     public function messages()
     {
         return [
-            'processor.required' => 'Please select a processor.',
+            'processor.required' => 'You must choose a payment method.',
             'transaction.exists' => 'Transaction code already exists.',
+            'disclaimer.required' => 'You must agree to the disclaimer.',
+            'terms.required' => 'You must agree to the terms and conditions.',
         ];
     }
 }

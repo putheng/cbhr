@@ -37,4 +37,4 @@
 	<!-- Nav CSS -->
 	<link href="{{ asset('css/emp/custom.css') }}" rel="stylesheet">
 	<!-- Custom CSS -->
-	<link href="{{ asset('css/emp/style.css') }}?v={{ time() }}" rel='stylesheet' type='text/css' />
+	<link href="{{ asset('css/emp/style.css') }}" rel='stylesheet' type='text/css' />

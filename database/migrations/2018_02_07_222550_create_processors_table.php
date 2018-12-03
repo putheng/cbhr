@@ -17,7 +17,7 @@ class CreateProcessorsTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->integer('minimum')->default(10);
-            $table->integer('recipient');
+            $table->string('recipient');
             $table->integer('code_length')->default(8);
         });
     }

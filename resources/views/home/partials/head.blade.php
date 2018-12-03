@@ -7,7 +7,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
 <link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
-<link rel="shortcut icon" href="/images/logo-3.png">
+<link rel="shortcut icon" href="/images/my-logo-3.png">
 <link href="/css/bootstrap.css" rel='stylesheet' type='text/css'>
 <link href="/css/main.css" rel='stylesheet' type='text/css'>
 <script src="/js/jquery-1.11.1.min.js"></script>

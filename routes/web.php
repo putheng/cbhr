@@ -1,7 +1,9 @@
 <?php
 
-Route::get('/privacy', 'PrivacyController@privacy');
-Route::get('/terms', 'PrivacyController@terms');
+Route::get('/privacy', 'PrivacyController@privacy')->name('privacy');
+Route::get('/terms', 'PrivacyController@terms')->name('terms');
+Route::get('/alllistings.html', 'PrivacyController@alllistings');
+Route::get('/allemployer.html', 'PrivacyController@allemployers');
 
 Route::get('/jobs', 'Listings\ListingController@jobs');
 

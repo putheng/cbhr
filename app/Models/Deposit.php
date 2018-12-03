@@ -20,7 +20,7 @@ class Deposit extends Model
 
     public function getProcessAttribute()
     {
-        return $this->processor_id == 1 ? 'Wing' : 'Truemoney';
+        return Processor::find($this->processor_id)->name;
     }
     
     public function user()
@@ -40,7 +40,7 @@ class Deposit extends Model
     
     public function scopeCurrentUser($query)
     {
-        return $query->where('user_id', request()->user()->id);
+        return $query->where('user_id', auth()->id());
     }
     
     public function processor()
