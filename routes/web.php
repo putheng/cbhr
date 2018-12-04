@@ -1,5 +1,9 @@
 <?php
 
+Route::get('test', function(){
+    
+});
+
 Route::get('/privacy', 'PrivacyController@privacy')->name('privacy');
 Route::get('/terms', 'PrivacyController@terms')->name('terms');
 Route::get('/alllistings.html', 'PrivacyController@alllistings');

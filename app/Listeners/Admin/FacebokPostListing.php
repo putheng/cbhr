@@ -14,9 +14,9 @@ class FacebookPostListing
 {
     public $facebook,
 
-            $token = 'EAADZBk437GZCoBANIDuZAhae07tNR7amO5zZBOuHPA1C8q9iZAhUAmkiqoXOZBxR8jHi3JjxV0WPjuBdav4Fdn3ZAxYOEJvegQrHFyWJZCXfL2KBZCKP4HmmiNl8gwWowfIasaoZCZCt64eeKEIQUvbQ5RN8rOZBBfsKJSIHn1ia1kD23QZDZD',
+            $token = config('facebook.page_token'),
 
-            $id = '1545494539067929';
+            $id = config('facebook.page_id');
     
     public function __construct()
     {
@@ -53,13 +53,17 @@ class FacebookPostListing
 		
 		$data['description'] = str_limit($listing->description, 150);
         
-        try {
-            $this->facebook->post('/'. $this->id .'/feed', $data, $this->token);
+        $random = random_int(1, 2);
 
-        } catch(Facebook\Exceptions\FacebookResponseException $e) {
+        if($random == 2){
+            try {
+                $this->facebook->post('/'. $this->id .'/feed', $data, $this->token);
 
-        } catch(Facebook\Exceptions\FacebookSDKException $e) {
+            } catch(Facebook\Exceptions\FacebookResponseException $e) {
 
+            } catch(Facebook\Exceptions\FacebookSDKException $e) {
+
+            }
         }
         
     }
