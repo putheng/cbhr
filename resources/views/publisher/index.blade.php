@@ -62,7 +62,7 @@
                     backgroundColor: window.chartColors.blue,
                     borderColor: window.chartColors.blue,
                     data:
-						{{ $posts->totalVIews }},
+						{{ $posts->totalViews }},
                 }]
             },
             options: {

@@ -60,7 +60,7 @@
 <!-- /#page-wrapper -->
 @endsection
 @section('script')
-<script src='http://connect.facebook.net/en_US/all.js' type="text/javascript"></script>
+<script src='https://connect.facebook.net/en_US/all.js' type="text/javascript"></script>
 <script type="text/javascript"> 
     FB.init({appId: "{{ config('services.facebook.client_id') }}", status: true, cookie: true});
     function postToFeed(url, id) {

@@ -34,7 +34,7 @@ class PostController extends Controller
     {
         $check = $request->user()->post()->listingExists($listing->id)->first();
         
-        if($check->count()){
+        if($check !== null){
             $check->increment('touch');
             
         }else{

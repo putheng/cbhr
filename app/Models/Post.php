@@ -26,7 +26,7 @@ class Post extends Model
     {
         $data = [];
         for ($x = 1; $x <= date('t'); $x++) {
-            $view = Post::viewOnDay($x);
+            $view = PostView::viewOnDay($x);
             $data[] = $view;
         }
         
@@ -36,26 +36,6 @@ class Post extends Model
     public function scopeListingExists($query, $id)
     {
         return $query->where('listing_id', $id)->get();
-    }
-    
-    public function scopeViewOnDay($query, $days)
-    {
-        $day = Carbon::createFromDate(null, null, $days)->toDateString();
-        
-        $check = $query->where(DB::raw('date(created_at)'), $day);
-        
-        if($check->count()){
-            return (int) $query->selectRaw('date(created_at) as date, SUM(views) as totalView')
-            ->where(DB::raw('date(created_at)'), $day)
-            ->where(function($q){
-                $q->where('user_id', auth()->id());
-            })
-            ->groupBy('date')
-            ->first()->totalView;
-        }
-        
-        return 0;
-        
     }
 
     public function views()

@@ -38,7 +38,7 @@ class FacebookPostListing
     {
         $listing = $event->listing;
         
-		$data['picture'] = route('company.cover.cover', $event->user->company);
+		$data['picture'] = $event->user->company->coverPath();
 		$data['link'] = route('listing.show', $listing) ."?fb=1";
 		$data['message'] =  "ក្រុមហ៊ុន ".
 		                    $listing->company->name .
@@ -46,7 +46,6 @@ class FacebookPostListing
 		                    $listing->title . "\n" .
 		                    "ទីកន្លែងធ្វើការ " .
 		                    $listing->area->name .', '. 
-		                    optional($listing->area->parent)->name ."\n".
 		                    "ប្រាក់ខែ" .
 		                    $listing->salary->name . "\n".
 		                    "ប្រសិនបើមានចំណាប់អារម្មណ៍ សូមប្រញាប់ដាក់ពាក្យ\n" .
