@@ -17,7 +17,7 @@ class EventServiceProvider extends ServiceProvider
             'App\Listeners\Listing\StoreUserCompleteListingPayment',
         ],
         'App\Events\Admin\CompleteListing' => [
-            'App\Listeners\Admin\FacebookPostListing\FacebookPostListing'
+            //'App\Listeners\Admin\FacebookPostListing'
         ],
         'App\Events\Admin\DepositApprovedEvent' => [
             'App\Listeners\Admin\DepositApproval'

@@ -12,11 +12,7 @@ use Facebook\Exceptions\FacebookResponseException;
 
 class FacebookPostListing
 {
-    public $facebook,
-
-            $token = config('facebook.page_token'),
-
-            $id = config('facebook.page_id');
+    protected $facebook;
     
     public function __construct()
     {
@@ -26,7 +22,7 @@ class FacebookPostListing
         	'default_graph_version' => 'v2.11',
         ]);
         
-        $this->facebook->setDefaultAccessToken($this->token);
+        $this->facebook->setDefaultAccessToken(config('facebook.page_token'));
     }
     /**
      * Handle the event.
@@ -53,11 +49,11 @@ class FacebookPostListing
 		
 		$data['description'] = str_limit($listing->description, 150);
         
-        $random = random_int(1, 2);
+        $random = random_int(1, 5);
 
         if($random == 2){
             try {
-                $this->facebook->post('/'. $this->id .'/feed', $data, $this->token);
+                $this->facebook->post('/'. config('facebook.page_id') .'/feed', $data, config('facebook.page_token'));
 
             } catch(Facebook\Exceptions\FacebookResponseException $e) {
 
