@@ -48,18 +48,13 @@ class FacebookPostListing
 		                    "សូមចុចលើរូបភាព ដើម្បីអានព័តមានបន្ថែម";
 		
 		$data['description'] = str_limit($listing->description, 150);
-        
-        $random = random_int(1, 5);
 
-        if($random == 2){
-            try {
-                $this->facebook->post('/'. config('facebook.page_id') .'/feed', $data, config('facebook.page_token'));
+        try {
+            $this->facebook->post('/'. config('facebook.page_id') .'/feed', $data, config('facebook.page_token'));
+        } catch(Facebook\Exceptions\FacebookResponseException $e) {
 
-            } catch(Facebook\Exceptions\FacebookResponseException $e) {
+        } catch(Facebook\Exceptions\FacebookSDKException $e) {
 
-            } catch(Facebook\Exceptions\FacebookSDKException $e) {
-
-            }
         }
         
     }

@@ -238,6 +238,24 @@ Route::group(['prefix' => 'employer', 'namespace' => 'User', 'middleware' => ['a
     
 });
 
+/* seeker */
+Route::group(['prefix' => 'jobseeker', 'namespace' => 'JobSeeker', 'as' => 'seeker.'], function(){
+
+    /* seeker/index */
+    Route::get('/', 'JobSeekerController@index')->name('index');
+
+
+    /* seeker/listings */
+    Route::group(['prefix' => 'listings', 'as' => 'listings.'], function(){
+        /* seeker/job/search */
+        Route::get('/', 'ListingsController@index')->name('index');
+        Route::get('/search', 'ListingsController@search')->name('search');
+        Route::get('/alert', 'ListingAlertController@index')->name('alert');
+        Route::get('/alert/add', 'ListingAlertController@create')->name('alert.create');
+
+    });
+
+});
 
 /**
  * Listing Api
