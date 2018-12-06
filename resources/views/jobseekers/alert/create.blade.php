@@ -8,7 +8,7 @@
 		<div class="col-lg-12" id="main_content">
 			<br>
 			<div class="fright">
-				<a class="small-tile blue-back" href="">
+				<a class="small-tile blue-back" href="{{ route('seeker.listings.alert') }}">
 					<img class="pull-right" width="32" src="{{ asset('images/icons/rules.png') }}">
 					<h3 class="h3-tile">Current Rules</h3>
 				</a>
@@ -19,7 +19,7 @@
 			</h3>
 			<br>
 			<table>
-				<form id="add-form" onsubmit="return NewRule(this)" action="" method="post" enctype="multipart/form-data"></form>
+				<form id="add-form" action="" method="post" enctype="multipart/form-data"></form>
 				<tbody>
 					<tr height="42">
 						<td valign="top" width="120">

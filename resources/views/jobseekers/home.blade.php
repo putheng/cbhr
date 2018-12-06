@@ -1,6 +1,6 @@
 @extends('jobseekers.index')
 @section('title')
-	<title>Job Seeker | CambodiaHR</title>
+	<title>Job Seeker | Dashboard</title>
 @endsection
 @section('content')
 <div class="page-content">
@@ -31,7 +31,7 @@
 						</div>
 						<div class="col-md-4 col-sm-6 col-xs-12 t-padding" id="box-2">
 							<div class="tile-p" id="b-2">
-								<a class="home-tile box-2-back" href="">
+								<a class="home-tile box-2-back" href="{{ route('seeker.profile.preferences') }}">
 									<img class="pull-right" src="{{ asset('images/icons/job_preferences.png') }}">
 									<h3 class="h3-tile">Job Preferences</h3>
 								</a>
@@ -39,7 +39,7 @@
 						</div>
 						<div class="col-md-4 col-sm-6 col-xs-12 t-padding" id="box-3">
 							<div class="tile-p" id="b-3">
-								<a class="home-tile box-3-back" href="">
+								<a class="home-tile box-3-back" href="{{ route('seeker.resume.create') }}">
 									<img class="pull-right" src="{{ asset('images/icons/resume_creator.png') }}">
 									<h3 class="h3-tile">Resume Creator</h3>
 								</a>
@@ -47,7 +47,7 @@
 						</div>
 						<div class="col-md-4 col-sm-6 col-xs-12 t-padding" id="box-4">
 							<div class="tile-p" id="b-4">
-								<a class="home-tile box-4-back" href="">
+								<a class="home-tile box-4-back" href="{{ route('seeker.listings.application') }}">
 									<img class="pull-right" src="{{ asset('images/apply.png') }}">
 									<h3 class="h3-tile">Application History</h3>
 								</a>
@@ -55,7 +55,7 @@
 						</div>
 						<div class="col-md-4 col-sm-6 col-xs-12 t-padding" id="box-5">
 							<div class="tile-p" id="b-5">
-								<a class="home-tile box-5-back" href="">
+								<a class="home-tile box-5-back" href="#">
 									<img class="pull-right" src="/images/icons/list.png">
 									<h3 class="h3-tile">My Documents</h3>
 								</a>
@@ -63,7 +63,7 @@
 						</div>
 						<div class="col-md-4 col-sm-6 col-xs-12 t-padding" id="box-6">
 							<div class="tile-p" id="b-6">
-								<a class="home-tile box-6-back" href="">
+								<a class="home-tile box-6-back" href="#">
 									<img class="pull-right" src="{{ asset('images/icons/add.png') }}">
 									<h3 class="h3-tile">Add a New Document</h3>
 								</a>
@@ -96,16 +96,11 @@
 @endsection
 
 @section('script')
-
 	<script type="text/javascript">
 		function CallBack()
 		{
-		
 			document.getElementById("main_container").innerHTML =
 			top.frames['ajax-ifr'].document.body.innerHTML.trim();
-			
-			$(init);
-		
 		}
 	</script>
 @endsection

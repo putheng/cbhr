@@ -3,7 +3,7 @@
 					<a href="index.php">
 						<div class="navbar-brand hide-sm">
 							<a class="text-logo-link custom-color" href="{{ route('home.index') }}" target="_blank">
-								Cambodia HR
+								Dashboard
 							</a>
 						</div>
 					</a>
@@ -26,7 +26,7 @@
 							</a>
 						</li>
 						<li>
-							<a title="New messages" href="#" class="notification-link dropdown-toggle">
+							<a title="New messages" href="{{ route('seeker.messages.index') }}" class="notification-link dropdown-toggle">
 							<img  src="{{ asset('images/email-icon.png') }}" width="21" height="21"/> 
 							<span class="number white-font pull-right">3</span>
 							</a>

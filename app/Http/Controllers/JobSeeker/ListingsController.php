@@ -7,13 +7,13 @@ use App\Http\Controllers\Controller;
 
 class ListingsController extends Controller
 {
-	public function index()
-	{
-
-	}
-
     public function search(Request $request)
     {
     	return view('jobseekers.jobs.search');
+    }
+
+    public function application()
+    {
+    	return view('jobseekers.jobs.application');
     }
 }

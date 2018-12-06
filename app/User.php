@@ -5,9 +5,8 @@ namespace App;
 use App\Models\{
     Company, Listing, ListingPayment,
     Deposit, Image, Post, Withdraw,
-    Publisher
+    Publisher, DepositAction
 };
-use App\Model\Admin\DepositAction;
 use App\Traits\Permissions\HasPermissionsTrait;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;

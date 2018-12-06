@@ -3,7 +3,7 @@
 namespace App\Listeners\Admin;
 
 use App\Events\Admin\DepositApprovedEvent;
-use App\Model\Admin\DepositAction;
+use App\Models\Admin\DepositAction;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 

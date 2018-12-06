@@ -227,7 +227,8 @@ Route::group(['prefix' => 'employer', 'namespace' => 'User', 'middleware' => ['a
     Route::group(['prefix' => 'profile', 'namespace' => 'Profile', 'as' => 'profile.'], function(){
         Route::get('/', 'ProfileController@show')->name('show');
         Route::post('/', 'ProfileController@store');
-        
+
+        /* employer/profile/company */
         Route::get('/company', 'CompanyController@show')->name('company');
         Route::patch('/company', 'CompanyController@store');
         
@@ -247,12 +248,36 @@ Route::group(['prefix' => 'jobseeker', 'namespace' => 'JobSeeker', 'as' => 'seek
 
     /* seeker/listings */
     Route::group(['prefix' => 'listings', 'as' => 'listings.'], function(){
-        /* seeker/job/search */
         Route::get('/', 'ListingsController@index')->name('index');
+
+        /* seeker/listings/search */
         Route::get('/search', 'ListingsController@search')->name('search');
+
+        /* seeker/listings/alert */
         Route::get('/alert', 'ListingAlertController@index')->name('alert');
         Route::get('/alert/add', 'ListingAlertController@create')->name('alert.create');
 
+        Route::get('/application', 'ListingsController@application')->name('application');    
+    });
+
+    /* seeker/messages */
+    Route::group(['prefix' => 'messages', 'as' => 'messages.'], function(){
+        Route::get('/', 'MessagesController@index')->name('index');
+        Route::get('/reply', 'MessagesController@reply')->name('reply');
+    });
+
+    /* seeker/profile */
+    Route::group(['prefix' => 'profile', 'as' => 'profile.'], function(){
+        Route::get('/edit', 'ProfileController@edit')->name('edit');
+        Route::get('password', 'PasswordController@index')->name('password');
+        Route::get('preferences', 'JobSeekerController@preferences')->name('preferences');
+        Route::get('statistics', 'JobSeekerController@statistics')->name('statistics');
+    });
+
+    /* seeker/resume */
+    Route::group(['prefix' => 'resume', 'as' => 'resume.'], function(){
+        Route::get('/', 'ResumeController@index')->name('index');
+        Route::get('/create', 'ResumeController@create')->name('create');
     });
 
 });
