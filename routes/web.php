@@ -1,9 +1,5 @@
 <?php
 
-Route::get('test', function(){
-    
-});
-
 Route::get('/privacy', 'PrivacyController@privacy')->name('privacy');
 Route::get('/terms', 'PrivacyController@terms')->name('terms');
 Route::get('/alllistings.html', 'PrivacyController@alllistings');
@@ -241,6 +237,12 @@ Route::group(['prefix' => 'employer', 'namespace' => 'User', 'middleware' => ['a
 
 /* seeker */
 Route::group(['prefix' => 'jobseeker', 'namespace' => 'JobSeeker', 'as' => 'seeker.'], function(){
+
+    Route::get('/register', 'SeekerRegisterController@index')->name('register');
+
+});
+
+Route::group(['prefix' => 'jobseeker', 'namespace' => 'JobSeeker', 'as' => 'seeker.', 'middleware' => ['auth', 'role:jobseeker,admin']], function(){
 
     /* seeker/index */
     Route::get('/', 'JobSeekerController@index')->name('index');
