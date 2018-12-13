@@ -32,7 +32,8 @@
 							</a>
 						</li>
 						<li>
-							<a title="LOGOUT" href="" title="LOGOUT" class="notification-link">
+							<a onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();" title="LOGOUT" href="{{ route('logout') }}" title="LOGOUT" class="notification-link">
 							<img src="{{ asset('images/logout-2.png') }}" width="20" height="20" alt="LOGOUT"/> 
 							</a>
 						</li>

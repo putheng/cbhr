@@ -18,12 +18,20 @@
 				Change your password
 			</h3>
 			<br>
-			<form action="index.php" method="post">
+			<form action="{{ route('seeker.profile.password') }}" method="post">
+				{{ csrf_field() }}
 				<table summary="" border="0">
 					<tbody>
 						<tr>
 							<td>Current password:</td>
-							<td><input type="password" name="oldpassword" size="40"></td>
+							<td>
+								<input {!! $errors->has('password_current') ? 'class="has-errorb"' : '' !!} type="password" name="password_current" size="40">
+								@if ($errors->has('password_current'))
+			                        <p class="text-danger">
+			                            <strong>{{ $errors->first('password_current') }}</strong>
+			                        </p>
+			                    @endif
+							</td>
 						</tr>
 						<tr height="30">
 							<td>&nbsp;</td>
@@ -31,16 +39,30 @@
 						</tr>
 						<tr>
 							<td>New password:</td>
-							<td><input type="password" name="newpassword1" size="40"></td>
+							<td>
+								<input {!! $errors->has('password') ? 'class="has-errorb"' : '' !!} type="password" name="password" size="40">
+								@if ($errors->has('password'))
+			                        <p class="text-danger">
+			                            <strong>{{ $errors->first('password') }}</strong>
+			                        </p>
+			                    @endif
+							</td>
 						</tr>
 						<tr>
 							<td>Confirm the new password: </td>
-							<td><input type="password" name="newpassword2" size="40"></td>
+							<td>
+								<input {!! $errors->has('password_confirmation') ? 'class="has-errorb"' : '' !!} type="password" name="password_confirmation" size="40">
+								@if ($errors->has('password_confirmation'))
+			                        <p class="text-danger">
+			                            <strong>{{ $errors->first('password_confirmation') }}</strong>
+			                        </p>
+			                    @endif
+							</td>
 						</tr>
 					</tbody>
 				</table>
 				<br><br>
-				<input class="btn btn-primary" type="submit" value=" Save ">
+				<input class="btn btn-primary" type="submit" value="Change password">
 			</form>
 		</div>
 	</div>

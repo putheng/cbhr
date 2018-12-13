@@ -7,8 +7,9 @@
 				</p>
 				<p class="name tooltip-sidebar-logout">
 					<a href="">
-					<span class="last-name">John Smith</span></a>
-					<a href="" title="logout">
+					<span class="last-name">{{ auth()->user()->name }}</span></a>
+					<a href="{{ route('logout') }}" title="logout" onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
 						<img title="logout" src="{{ asset('images/logout.png') }}" style="display:inline;position:relative;top:6px"/>
 					</a>
 				</p>

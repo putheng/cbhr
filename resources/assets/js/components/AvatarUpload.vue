@@ -1,9 +1,9 @@
 <template>
     <div>
         <div class="form-group" :class="{ 'has-error': errors[this.sendAs] }">
-            <label :for="sendAs" class="control-label">Avatar</label>
+            <label :for="sendAs" class="control-label avatar_upload_form">+</label>
             <div v-if="uploading"><img src="/images/wait_big.gif"></div>
-            <input v-else type="file" v-on:change="fileChange" :name="sendAs" accept="image/*">
+            <input id="image" v-else type="file" v-on:change="fileChange" :name="sendAs" accept="image/*" class="hidden">
 
             <div class="help-block text-danger" v-if="error">
                 {{ errors.errors.image[0] }}

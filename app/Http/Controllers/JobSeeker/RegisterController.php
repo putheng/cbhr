@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers\JobSeeker;
 
+use Auth;
 use App\User;
 use App\Models\Seeker;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\JobSeeker\RegisterFormRequest;
 
-class SeekerRegisterController extends Controller
+class RegisterController extends Controller
 {
     public function index()
     {
@@ -31,12 +32,14 @@ class SeekerRegisterController extends Controller
         $seeker = new Seeker;
 
         $seeker->phone = $request->phone;
-        $seker->gender = $request->gender;
-        $seker->newsletter = $newsletter;
+        $seeker->gender = $request->gender;
+        $seeker->newsletter = $newsletter;
         
         $seeker->user()->associate($user);
         $seeker->save();
 
-        dd($seeker);
+        Auth::login($user);
+
+        return redirect()->to(role_url());
     }
 }

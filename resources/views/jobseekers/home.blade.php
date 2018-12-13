@@ -11,7 +11,7 @@
 			<div class="row">
 				<div class="col-md-3 welcome-left-block">
 					<h2>
-						Welcome John,
+						Welcome {{ auth()->user()->name }}
 					</h2>
 					<br><br>
 					<span class="home-warning-text">

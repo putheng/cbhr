@@ -102,6 +102,6 @@ class User extends Authenticatable
 
     public function seeker()
     {
-        return $this->belongsTo(Seeker::class);
+        return $this->hasOne(Seeker::class);
     }
 }

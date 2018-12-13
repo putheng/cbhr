@@ -3805,5 +3805,20 @@ input[type="submit"].custom-gradient{
 	border-color: #cccccc !important;
 }
 
+label.control-label.avatar_upload_form {
+	display: inline-block;
+    position: relative;
+    border: 2px dashed #c5c5c5;
+    padding: 10px 50px;
+    border-radius: 3px;
+    background-color: #eeeeee9c;
+    margin: 15px 0px;
+    cursor: pointer;
+    font-size: 20px;
+    color: #616161;
+}
 
-
+.has-errorb {
+    border: 1px solid #dc0000 !important;
+    font-weight: bold;
+}

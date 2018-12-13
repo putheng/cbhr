@@ -112,7 +112,7 @@
 										<td><b>Email</b></td>
 										<td>
 											<div>contact@cambodiahr.com</div>
-											{{-- {!! email_protected($listing->user->email) !!} --}}
+											{!! email_protected($listing->user->email) !!}<br>
 										</td>
 									</tr>
 									<tr>
@@ -161,6 +161,10 @@
 			<br>
 			<img class="l-margin-20" src="{{ asset('images/save-small-icon.png') }}" height="12">
 			<a class="small-link gray-link" href="javascript:SaveListing({{ $listing->id }})" id="save_{{ $listing->id }}">Save this job</a>	
+			<div class="clearfix"></div>
+			<div class="pull-right"> 
+				{{-- <input type="submit" data-toggle="modal" data-target="#apply-modal" class="btn btn-default custom-gradient btn-green" value=" Apply for this Job "> --}}
+			</div>
 			<div class="clearfix"></div>
 		</div>
 	</div>

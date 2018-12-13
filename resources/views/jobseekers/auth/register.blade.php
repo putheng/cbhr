@@ -84,7 +84,7 @@
 			<div class="col-md-4 pull-right text-center">
 				<button type="submit" class="btn btn-primary" style="padding:10px 45px;">Submit</button>
 				<br><br>
-				<p class="h5">Already member <a href="{{ url('/login') }}" class="text-primary">Login</a></p>
+				<p class="h5">Already member ? <a href="{{ url('/login') }}" class="text-primary">Login</a></p>
 			</div>
 			<div class="clearfix"></div>
 		</div>

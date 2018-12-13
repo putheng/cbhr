@@ -8,7 +8,7 @@
 		<div class="col-lg-12" id="main_content">
 			<br/>
 			<div class="fright">
-				<a class="small-tile yellow-back" href="">
+				<a class="small-tile yellow-back" href="{{ route('seeker.index') }}">
 					<img class="pull-right" width="32" src="{{ asset('images/icons/welcome.png') }}"/>
 					<h3 class="h3-tile">Dashboard</h3>
 				</a>

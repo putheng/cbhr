@@ -236,14 +236,14 @@ Route::group(['prefix' => 'employer', 'namespace' => 'User', 'middleware' => ['a
 });
 
 /* seeker */
-Route::group(['prefix' => 'jobseeker', 'namespace' => 'JobSeeker', 'as' => 'seeker.'], function(){
+Route::group(['prefix' => 'jobseeker', 'namespace' => 'JobSeeker', 'as' => 'seeker.', 'middleware' => 'guest'], function(){
 
-    Route::get('/register', 'SeekerRegisterController@index')->name('register');
-    Route::post('/register', 'SeekerRegisterController@store');
+    Route::get('/register', 'RegisterController@index')->name('register');
+    Route::post('/register', 'RegisterController@store');
 
 });
 
-Route::group(['prefix' => 'jobseeker', 'namespace' => 'JobSeeker', 'as' => 'seeker.'], function(){
+Route::group(['prefix' => 'jobseeker', 'namespace' => 'JobSeeker', 'as' => 'seeker.', 'middleware' => ['auth', 'role:jobseeker,admin']], function(){
 
     /* seeker/index */
     Route::get('/', 'JobSeekerController@index')->name('index');
@@ -272,7 +272,11 @@ Route::group(['prefix' => 'jobseeker', 'namespace' => 'JobSeeker', 'as' => 'seek
     /* seeker/profile */
     Route::group(['prefix' => 'profile', 'as' => 'profile.'], function(){
         Route::get('/edit', 'ProfileController@edit')->name('edit');
+        Route::post('/edit', 'ProfileController@store');
+
         Route::get('password', 'PasswordController@index')->name('password');
+        Route::post('password', 'PasswordController@store');
+
         Route::get('preferences', 'JobSeekerController@preferences')->name('preferences');
         Route::get('statistics', 'JobSeekerController@statistics')->name('statistics');
     });
