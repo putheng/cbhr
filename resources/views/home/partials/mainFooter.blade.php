@@ -15,7 +15,7 @@
 							<a href="">Affiliate</a>
 						</li>
 						<li>
-							<a href="">Job Seeker</a>
+							<a href="{{ route('seeker.register') }}">Job Seeker</a>
 						</li>
 						<li>
 							<a href="">Job Package</a>

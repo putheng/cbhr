@@ -30,7 +30,6 @@
         @include('home.partials.companyCarousel')
         @include('home.partials.mainFooter')
         @include('home.partials.footerBottom')
-        @include('home.partials.loginDialog')
         @include('home.partials.applyModal')
         <script type="text/javascript" src="{{ asset('js/carousel.js') }}"></script>
         <script type="text/javascript" src="{{ asset('js/functions.js?v=5') }}"></script>

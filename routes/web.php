@@ -239,10 +239,11 @@ Route::group(['prefix' => 'employer', 'namespace' => 'User', 'middleware' => ['a
 Route::group(['prefix' => 'jobseeker', 'namespace' => 'JobSeeker', 'as' => 'seeker.'], function(){
 
     Route::get('/register', 'SeekerRegisterController@index')->name('register');
+    Route::post('/register', 'SeekerRegisterController@store');
 
 });
 
-Route::group(['prefix' => 'jobseeker', 'namespace' => 'JobSeeker', 'as' => 'seeker.', 'middleware' => ['auth', 'role:jobseeker,admin']], function(){
+Route::group(['prefix' => 'jobseeker', 'namespace' => 'JobSeeker', 'as' => 'seeker.'], function(){
 
     /* seeker/index */
     Route::get('/', 'JobSeekerController@index')->name('index');

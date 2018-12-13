@@ -40,7 +40,7 @@
 							<span class="glyphicon glyphicon-phone-alt"></span>
 							Phone<br>
 							</b>
-							{{ $company->phone }}					
+							{{ $company->phone }}			
 						</p>
 						<br>
 						<p>
@@ -72,15 +72,15 @@
 							<span class="glyphicon glyphicon-education"></span>
 							Employees <br>
 							</b>
-							{{ $company->employee->name }}						
+							{{ $company->employee->name }}			
 						</p>
 						<br>
 						<p>
 							<b>
 							<span class="glyphicon glyphicon-globe"></span>
 							Website<br>
-							</b>
-							<a href="{{ url($company->website) }}" target="_blank">{{ $company->website }}</a>
+							</b>				
+							<a href="//{{ $company->website }}" target="_blank">{{ $company->website }}</a>
 						</p>
 						<br>
 						<p>

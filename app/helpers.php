@@ -1,4 +1,11 @@
 <?php
+function emailIsValid($email)
+{
+    if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+      return $email;
+    }
+}
+
 if(!function_exists('setLoadToken')){
     function setLoadToken(){
         $token = str_random(199);
@@ -138,7 +145,7 @@ if (!function_exists('return_if')) {
 if(!function_exists('email_protected')){
     function email_protected($value)
     {
-		if(!empty($value)){
+		if(!empty($value) && filter_var($value, FILTER_VALIDATE_EMAIL)){
 			$obscured = null;
 			$identifier = md5(uniqid(true));
 
@@ -167,6 +174,8 @@ EOT;
 
 			return trim(preg_replace('/\s+/', ' ', $output));
 		}
+
+        return $value;
     }
 }
 

@@ -28,7 +28,7 @@
 			<div class="icon-h5">
 				<h5><span class="glyphicon glyphicon-equalizer"></span> {{ $listing->company->name }}</h5>
 				<h5><span class="glyphicon glyphicon-map-marker"></span>
-				@if($listing->area->parent->count())
+				@if($listing->area->parent)
 					{{ $listing->area->parent->name }} &raquo {{ $listing->area->name }}
 				@else
 					{{ $listing->area->name }}

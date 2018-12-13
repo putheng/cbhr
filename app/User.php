@@ -5,7 +5,7 @@ namespace App;
 use App\Models\{
     Company, Listing, ListingPayment,
     Deposit, Image, Post, Withdraw,
-    Publisher, DepositAction
+    Publisher, DepositAction, Seeker
 };
 use App\Traits\Permissions\HasPermissionsTrait;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -98,5 +98,10 @@ class User extends Authenticatable
     public function publisher()
     {
         return $this->hasOne(Publisher::class);
+    }
+
+    public function seeker()
+    {
+        return $this->belongsTo(Seeker::class);
     }
 }
