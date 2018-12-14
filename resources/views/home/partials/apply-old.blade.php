@@ -10,28 +10,24 @@
 					<form class="login-form" action="" method="post">
 						<input type="hidden" name="mod" value="login">
 						<div class="log-response"></div>
-						<br>
-
-						<div class="form-group">
-							<label class="control-label">Full name</label>
-							<input type="text" name="name" class="form-control input-pd">
-						</div>
-
-						<div class="form-group">
-							<label class="control-label">Email</label>
-							<input type="text" name="email" class="form-control input-pd">
+						<br><br>
+						<div class="input-group">
+							<span class="input-group-addon" id="basic-addon1">RESUME</span>
+							<select class="form-control" aria-describedby="basic-addon1">
+								<option value="">Web Developer</option>
+							</select>
 						</div>
 						<br>
 						<div class="divider">
-							<span>Upload your resume</span>
+							<span>AND</span>
 						</div>
-						<div class="form-group text-center">
-							<label for="resume" class="control-label avatar_upload_form">+</label>
-							<input type="file" name="resume" id="resume" class="hidden">
-							
+						<div class="input-group">
+							<span class="input-group-addon" id="basic-addon1">LETTER &nbsp;&nbsp;</span>
+							<select class="form-control" aria-describedby="basic-addon1">
+								<option value="">Web Developer</option>
+							</select>
 						</div>
-
-						<br>
+						<br><br>
 						<button type="submit" class="btn btn-block btn-primary custom-back-color">Apply Now</button>
 						<div class="loading" style="display:none;text-align: center;">
 							<span class="l-1"></span><span class="l-2"></span><span class="l-3"></span>

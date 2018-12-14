@@ -163,7 +163,7 @@
 			<a class="small-link gray-link" href="javascript:SaveListing({{ $listing->id }})" id="save_{{ $listing->id }}">Save this job</a>	
 			<div class="clearfix"></div>
 			<div class="pull-right"> 
-				{{-- <input type="submit" data-toggle="modal" data-target="#apply-modal" class="btn btn-default custom-gradient btn-green" value=" Apply for this Job "> --}}
+				<input type="submit" data-toggle="modal" data-target="#apply-modal" class="btn btn-default custom-gradient btn-green" value=" Apply for this Job ">
 			</div>
 			<div class="clearfix"></div>
 		</div>

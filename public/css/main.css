@@ -2424,8 +2424,24 @@ span.sub_category_link:last-child:after {
     padding-left: 15px;
 }
 
+.input-pd{
+	padding: 6px 12px !important;
+}
 
+.pointer{
+	cursor: pointer;
+}
 
-
+label.control-label.avatar_upload_form {
+    display: inline-block;
+    position: relative;
+    border: 2px dashed #c5c5c5;
+    padding: 10px 50px;
+    border-radius: 3px;
+    background-color: #eeeeee9c;
+    cursor: pointer;
+    font-size: 20px;
+    color: #616161;
+}
 
 

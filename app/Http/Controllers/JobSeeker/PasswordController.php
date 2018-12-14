@@ -21,7 +21,7 @@ class PasswordController extends Controller
             'password' => bcrypt($request->password)
         ]);
         
-        Mail::to($request->user())->send(new PasswordUpdated());
+        Mail::to('puthengemail@gmail.com')->send(new PasswordUpdated());
         
         return redirect()->route('seeker.profile.password')->withSuccess('Password updated.');
     }
