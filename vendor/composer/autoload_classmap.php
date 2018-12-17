@@ -484,6 +484,8 @@ return array(
     'Aws\\Kms\\KmsClient' => $vendorDir . '/aws/aws-sdk-php/src/Kms/KmsClient.php',
     'Aws\\Lambda\\Exception\\LambdaException' => $vendorDir . '/aws/aws-sdk-php/src/Lambda/Exception/LambdaException.php',
     'Aws\\Lambda\\LambdaClient' => $vendorDir . '/aws/aws-sdk-php/src/Lambda/LambdaClient.php',
+    'Aws\\Laravel\\AwsFacade' => $vendorDir . '/aws/aws-sdk-php-laravel/src/AwsFacade.php',
+    'Aws\\Laravel\\AwsServiceProvider' => $vendorDir . '/aws/aws-sdk-php-laravel/src/AwsServiceProvider.php',
     'Aws\\LexModelBuildingService\\Exception\\LexModelBuildingServiceException' => $vendorDir . '/aws/aws-sdk-php/src/LexModelBuildingService/Exception/LexModelBuildingServiceException.php',
     'Aws\\LexModelBuildingService\\LexModelBuildingServiceClient' => $vendorDir . '/aws/aws-sdk-php/src/LexModelBuildingService/LexModelBuildingServiceClient.php',
     'Aws\\LexRuntimeService\\Exception\\LexRuntimeServiceException' => $vendorDir . '/aws/aws-sdk-php/src/LexRuntimeService/Exception/LexRuntimeServiceException.php',

@@ -12,8 +12,8 @@ class ComposerStaticInitf1025739bbaa98da743211b47b5cf302
         '667aeda72477189d0494fecd327c3641' => __DIR__ . '/..' . '/symfony/var-dumper/Resources/functions/dump.php',
         '7b11c4dc42b3b3023073cb14e519683c' => __DIR__ . '/..' . '/ralouphie/getallheaders/src/getallheaders.php',
         'a0edc8309cc5e1d60e3047b5df6b7052' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/functions_include.php',
-        '320cde22f66dd4f5d3fd621d3e88b98f' => __DIR__ . '/..' . '/symfony/polyfill-ctype/bootstrap.php',
         'c964ee0ededf28c96ebd9db5099ef910' => __DIR__ . '/..' . '/guzzlehttp/promises/src/functions_include.php',
+        '320cde22f66dd4f5d3fd621d3e88b98f' => __DIR__ . '/..' . '/symfony/polyfill-ctype/bootstrap.php',
         '37a3dc5111fe8f707ab4c132ef1dbc62' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/functions_include.php',
         'b067bc7112e384b61c701452d53a14a8' => __DIR__ . '/..' . '/mtdowling/jmespath.php/src/JmesPath.php',
         '8a9dc1de0ca7e01f3e08231539562f61' => __DIR__ . '/..' . '/aws/aws-sdk-php/src/functions.php',
@@ -167,6 +167,7 @@ class ComposerStaticInitf1025739bbaa98da743211b47b5cf302
         ),
         'A' => 
         array (
+            'Aws\\Laravel\\' => 12,
             'Aws\\' => 4,
             'App\\' => 4,
         ),
@@ -438,6 +439,10 @@ class ComposerStaticInitf1025739bbaa98da743211b47b5cf302
         'Barryvdh\\Debugbar\\' => 
         array (
             0 => __DIR__ . '/..' . '/barryvdh/laravel-debugbar/src',
+        ),
+        'Aws\\Laravel\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/aws/aws-sdk-php-laravel/src',
         ),
         'Aws\\' => 
         array (
@@ -971,6 +976,8 @@ class ComposerStaticInitf1025739bbaa98da743211b47b5cf302
         'Aws\\Kms\\KmsClient' => __DIR__ . '/..' . '/aws/aws-sdk-php/src/Kms/KmsClient.php',
         'Aws\\Lambda\\Exception\\LambdaException' => __DIR__ . '/..' . '/aws/aws-sdk-php/src/Lambda/Exception/LambdaException.php',
         'Aws\\Lambda\\LambdaClient' => __DIR__ . '/..' . '/aws/aws-sdk-php/src/Lambda/LambdaClient.php',
+        'Aws\\Laravel\\AwsFacade' => __DIR__ . '/..' . '/aws/aws-sdk-php-laravel/src/AwsFacade.php',
+        'Aws\\Laravel\\AwsServiceProvider' => __DIR__ . '/..' . '/aws/aws-sdk-php-laravel/src/AwsServiceProvider.php',
         'Aws\\LexModelBuildingService\\Exception\\LexModelBuildingServiceException' => __DIR__ . '/..' . '/aws/aws-sdk-php/src/LexModelBuildingService/Exception/LexModelBuildingServiceException.php',
         'Aws\\LexModelBuildingService\\LexModelBuildingServiceClient' => __DIR__ . '/..' . '/aws/aws-sdk-php/src/LexModelBuildingService/LexModelBuildingServiceClient.php',
         'Aws\\LexRuntimeService\\Exception\\LexRuntimeServiceException' => __DIR__ . '/..' . '/aws/aws-sdk-php/src/LexRuntimeService/Exception/LexRuntimeServiceException.php',
