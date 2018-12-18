@@ -27,7 +27,7 @@
 						</div>
 						<div class="form-group text-center">
 							<label for="resume" class="control-label avatar_upload_form">+</label>
-							<input type="file" name="resume" id="resume" class="hidden">
+							<input type="file" name="resume[]" id="resume" class="hidden" multiple="multiple">
 							
 						</div>
 
