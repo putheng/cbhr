@@ -1,5 +1,8 @@
 <?php
 
+Route::get('/upload', 'UploadController@index')->name('upload');
+Route::post('/upload', 'UploadController@store');
+
 Route::get('/privacy', 'PrivacyController@privacy')->name('privacy');
 Route::get('/terms', 'PrivacyController@terms')->name('terms');
 Route::get('/alllistings.html', 'PrivacyController@alllistings');
