@@ -1,7 +1,15 @@
 <?php
 
-Route::get('/upload', 'UploadController@index')->name('upload');
-Route::post('/upload', 'UploadController@store');
+Route::group(['prefix' => 'file', 'namespace' => 'File', 'as' => 'file.'], function(){
+
+    Route::get('upload', 'UploadController@index')->name('upload');
+    Route::post('upload', 'UploadController@store');
+
+    Route::delete('upload', 'DeleteController@destory')->name('destory');
+
+    Route::get('download', 'FileController@download')->name('download');
+
+});
 
 Route::get('/privacy', 'PrivacyController@privacy')->name('privacy');
 Route::get('/terms', 'PrivacyController@terms')->name('terms');

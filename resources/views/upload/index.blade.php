@@ -4,20 +4,20 @@
 	<link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.css?v=1') }}">
 </head>
 <body>
-	<div class="progress">
-		<div class="progress-bar" role="progressbar" 
-			aria-valuenow="60" aria-valuemin="0" 
-			aria-valuemax="100">
-			<span class="status">0%</span>
-	  </div>
-	</div>
+	<ul id="lists"></ul>
+	<span id="loading" class="hidden">Loading ...</span>
 
-	<input type="file" name="file" id="file">
+	<input type="file" name="file" id="file"/>
 
 
 	<script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
 
 	<script type="text/javascript">
+
+	function deleteFile(id)
+	{
+		$('li#remove_'+id).remove();
+	}
 
 	$("#file").on("change", function (e) {
 	    var file = $(this)[0].files[0];
@@ -25,6 +25,7 @@
 
 	    // maby check size or type here with upload.getSize() and upload.getType()
 
+	    $('#loading').removeClass('hidden');
 	    // execute upload
 	    upload.doUpload();
 	});
@@ -45,14 +46,13 @@
 	Upload.prototype.doUpload = function () {
 	    var that = this;
 	    var formData = new FormData();
-
 	    // add assoc key values, this will be posts values
 	    formData.append("file", this.file, this.getName());
 	    formData.append("upload_file", true);
 
 	    $.ajax({
 	        type: "POST",
-	        url: "{{ route('upload') }}",
+	        url: "{{ route('file.upload') }}",
 	        headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
 	        xhr: function () {
 	            var myXhr = $.ajaxSettings.xhr();
@@ -62,7 +62,8 @@
 	            return myXhr;
 	        },
 	        success: function (data) {
-	            console.log(data)
+	        	$('#lists').append('<li id="remove_'+ data.id +'">'+ data.name +'&nbsp;&nbsp;<a href="#" onclick="deleteFile('+data.id+');">x</></li>');
+	        	 $('#loading').addClass('hidden');
 	        },
 	        error: function (error) {
 	            // handle error
@@ -76,18 +77,6 @@
 	    });
 	};
 
-	Upload.prototype.progressHandling = function (event) {
-	    var percent = 0;
-	    var position = event.loaded || event.position;
-	    var total = event.total;
-	    var progress_bar_id = ".progress";
-	    if (event.lengthComputable) {
-	        percent = Math.ceil(position / total * 100);
-	    }
-	    // update progressbars classes so it fits your code
-	    $(progress_bar_id + " .progress-bar").css("width", +percent + "%");
-	    $(progress_bar_id + " .status").text(percent + "%");
-	};
 	</script>
 </body>
 </html>
