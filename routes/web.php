@@ -1,13 +1,24 @@
 <?php
+use App\Models\Apply;
+
+
+Route::get('/test', function(){
+    $apply = Apply::find(3);
+
+    dd($apply->files);
+
+    //return response('ok', 200);
+});
 
 Route::group(['prefix' => 'file', 'namespace' => 'File', 'as' => 'file.'], function(){
 
     Route::get('upload', 'UploadController@index')->name('upload');
     Route::post('upload', 'UploadController@store');
 
-    Route::delete('upload', 'DeleteController@destory')->name('destory');
-
+    Route::post('delete', 'DeleteController@destroy')->name('destroy');
     Route::get('download', 'FileController@download')->name('download');
+
+    Route::post('apply/{listing}', 'FileController@apply')->name('apply');
 
 });
 

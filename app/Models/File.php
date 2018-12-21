@@ -7,7 +7,7 @@ use App\Models\Apply;
 
 class File extends Model
 {
-    protected $fillable = ['name', 'path'];
+    protected $fillable = ['name', 'path', 'apply_id'];
 
     public function apply()
     {

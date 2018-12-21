@@ -109,13 +109,6 @@
 										<td>{{ $listing->company->phone }}</td>
 									</tr>
 									<tr>
-										<td><b>Email</b></td>
-										<td>
-											<div>contact@cambodiahr.com</div>
-											{!! email_protected($listing->user->email) !!}<br>
-										</td>
-									</tr>
-									<tr>
 										<td><b>Address</b></td>
 										<td>{{ $listing->company->address }}</td>
 									</tr>
@@ -125,16 +118,6 @@
 											<a href="{{ $listing->company->website }}" target="_blank">
 												{{ $listing->company->website }}
 											</a>
-										</td>
-									</tr>
-									<tr>
-										<td>
-											<b class="text-danger">Note:</b>
-										</td>
-										<td class="text-danger">
-											កំុភ្លេចនិយាយថាអ្នកបានឃើញការផ្សព្វផ្សាយនេះនៅលើ CambodiaHR.com
-											<br>
-											Don't forget to mention that you found this ad on CambodiaHR.com 
 										</td>
 									</tr>
 								</tbody>
@@ -201,11 +184,96 @@
 	<hr class="top-bottom-margin">
 	<div class="hide text-center"></div>
 
+	@include('home.partials.applyModal')
 @endsection
 @section('script')
 <script type="text/javascript">
-$(document).ready(function(){
-	fill_dropdownMenu('{{ request('token') }}', '{{ csrf_token() }}', '{{ setLoadToken() }}');
-});
+	$("#lists").on("click", ".badge", function() {
+		if(confirm('Are you sure you want to permanently delete this file?')){
+			var id = $(this).attr('id');
+			$.ajax({
+		        type: "POST",
+		        url: "{{ route('file.destroy') }}",
+		        headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+		        success: function (data) {
+		        	//
+		        },
+		        async: true,
+		        data: {hash:id},
+		    });
+			
+			$(this).parent().remove();
+		}
+	});
+
+	$("#resume").on("change", function (e) {
+	    var file = $(this)[0].files[0];
+	    var upload = new Upload(file);
+
+	    if(upload.getSize() < 10485760){
+	    	$('#loading').removeClass('hidden');
+	    	upload.doUpload();
+	    }else{
+	    	alert('File size should be less than 10Mb');
+	    }
+	});
+
+	var Upload = function (file) {
+	    this.file = file;
+	};
+
+	Upload.prototype.getType = function() {
+	    return this.file.type;
+	};
+	Upload.prototype.getSize = function() {
+	    return this.file.size;
+	};
+	Upload.prototype.getName = function() {
+	    return this.file.name;
+	};
+	Upload.prototype.doUpload = function () {
+	    var that = this;
+	    var formData = new FormData();
+	    // add assoc key values, this will be posts values
+	    formData.append("file", this.file, this.getName());
+	    formData.append("upload_file", true);
+
+	    $.ajax({
+	        type: "POST",
+	        url: "{{ route('file.upload') }}",
+	        headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+	        xhr: function () {
+	            var myXhr = $.ajaxSettings.xhr();
+	            if (myXhr.upload) {
+	                myXhr.upload.addEventListener('progress', that.progressHandling, false);
+	            }
+	            return myXhr;
+	        },
+	        success: function (data) {
+	        	$('#lists').append(`<li>
+	        		<input type="hidden" name="resume[]" value="${data.id}">
+	        		<a id="${data.id}" class="badge" href="#">x</a>${data.name}
+	        	</li>`);
+
+	        	 $('#loading').addClass('hidden');
+	        },
+	        error: function (error) {
+	        	//
+	        },
+	        async: true,
+	        data: formData,
+	        cache: false,
+	        contentType: false,
+	        processData: false,
+	        timeout: 60000
+	    });
+	};
+
+
+
+
+	$(document).ready(function(){
+		fill_dropdownMenu('{{ request('token') }}', '{{ csrf_token() }}', '{{ setLoadToken() }}');
+	});
 </script>
 @endsection

@@ -163,6 +163,11 @@ class Listing extends Model
     {
         return $this->user->id === $user->id;
     }
+
+    public function apply()
+    {
+        return $this->hasMany(Apply::class);
+    }
     
     public function user()
     {

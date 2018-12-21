@@ -14,20 +14,30 @@
 
 	<script type="text/javascript">
 
-	function deleteFile(id)
-	{
-		$('li#remove_'+id).remove();
-	}
+	$("#lists").on("click", ".badge", function() {
+		if(confirm('Are you sure you want to permanently delete this file?')){
+			var id = $(this).attr('id');
+			$.ajax({
+		        type: "POST",
+		        url: "{{ route('file.destroy') }}",
+		        headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+		        async: true,
+		        data: {hash:id},
+		    });
+			$(this).parent().remove();
+		}
+	});
 
 	$("#file").on("change", function (e) {
 	    var file = $(this)[0].files[0];
 	    var upload = new Upload(file);
 
-	    // maby check size or type here with upload.getSize() and upload.getType()
-
-	    $('#loading').removeClass('hidden');
-	    // execute upload
-	    upload.doUpload();
+	    if(upload.getSize() < 10485760){
+	    	$('#loading').removeClass('hidden');
+	    	upload.doUpload();
+	    }else{
+	    	alert('File size should be less than 10Mb');
+	    }
 	});
 
 	var Upload = function (file) {
@@ -62,7 +72,7 @@
 	            return myXhr;
 	        },
 	        success: function (data) {
-	        	$('#lists').append('<li id="remove_'+ data.id +'">'+ data.name +'&nbsp;&nbsp;<a href="#" onclick="deleteFile('+data.id+');">x</></li>');
+	        	$('#lists').append('<li>'+ data.name +'&nbsp;&nbsp;<a id="'+ data.id +'" class="badge" href="#">x</></li>');
 	        	 $('#loading').addClass('hidden');
 	        },
 	        error: function (error) {

@@ -13,4 +13,9 @@ class Apply extends Model
     {
     	return $this->hasMany(File::class);
     }
+
+    public function listing()
+    {
+    	return $this->belongsTo(Listing::class);
+    }
 }

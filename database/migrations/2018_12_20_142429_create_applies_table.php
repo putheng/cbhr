@@ -16,13 +16,9 @@ class CreateAppliesTable extends Migration
         Schema::create('applies', function (Blueprint $table) {
             $table->increments('id');
             $table->string('username');
-            $table->string('email');
+            $table->string('phone');
             $table->integer('listing_id')->unsigned();
-            $table->integer('file_id')->unsigned();
             $table->timestamps();
-
-            $table->foreign('listing_id')->references('id')->on('listings')->onDelete('cascade');
-            $table->foreign('file_id')->references('id')->on('files')->onDelete('cascade');
         });
     }
 

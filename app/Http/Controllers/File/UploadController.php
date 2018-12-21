@@ -23,7 +23,7 @@ class UploadController extends Controller
 
     	return response()->json([
     		'name' => $file->getClientOriginalName(),
-    		'id' => $fileUpload->id,
+    		'id' => encrypt($fileUpload->id),
     	]);
     }
 
@@ -47,16 +47,17 @@ class UploadController extends Controller
     public function storeFileUpload(UploadedFile $uploadFile)
     {
     	$fileName = $uploadFile->getClientOriginalName();
+        $filePath = $this->buildFilePath($uploadFile);
 
-    	Storage::put(
-    		$this->buildFilePath($uploadFile),
+    	Storage::disk('s3')->put(
+    		$filePath,
     		$this->getFileContent($uploadFile)
     	);
 
     	$file = new File;
 
     	$file->name = $fileName;
-    	$file->path = $this->buildFilePath($uploadFile);
+    	$file->path = $filePath;
 
     	$file->save();
 
