@@ -20,7 +20,7 @@ class CreateListingController extends Controller
     public function show(Request $request)
     {
         $id = $request->id ? $request->id : 1;
-        $content = file_get_contents('https://hrload-putheng.c9users.io/?url=admin/api/'. $id);
+        $content = file_get_contents('https://api.cambodiahr.com/admin/api/'. $id);
         
         $json = json_decode($content, JSON_UNESCAPED_SLASHES);
         
