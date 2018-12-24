@@ -3,11 +3,11 @@ use App\Models\Apply;
 
 
 Route::get('/test', function(){
-    $apply = Apply::find(3);
+    $apply = Apply::find(10);
 
-    dd($apply->files);
+    $apply->files;
 
-    //return response('ok', 200);
+    return response('ok', 200);
 });
 
 Route::group(['prefix' => 'file', 'namespace' => 'File', 'as' => 'file.'], function(){

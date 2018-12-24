@@ -258,7 +258,7 @@
 	        	 $('#loading').addClass('hidden');
 	        },
 	        error: function (error) {
-	        	//
+	        	$('#loading').addClass('hidden');
 	        },
 	        async: true,
 	        data: formData,

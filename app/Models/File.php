@@ -9,6 +9,11 @@ class File extends Model
 {
     protected $fillable = ['name', 'path', 'apply_id'];
 
+    public function getDownloadAttribute()
+    {
+    	return encrypt($this->id);
+    }
+
     public function apply()
     {
     	return $this->belongsTo(Apply::class);

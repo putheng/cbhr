@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\File;
 
+use Mail;
 use Storage;
-use App\Models\{Listing, Apply, File};
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Mail\DirectJobApply;
+use App\Models\{Listing, Apply, File};
 
 class FileController extends Controller
 {
@@ -29,16 +31,21 @@ class FileController extends Controller
 		foreach($request->resume as $resume){
 			$file = File::find(decrypt($resume));
 			$file->update(['apply_id' => $apply->id]);
-
 		}
+
+		Mail::to('contact@cambodiahr.com')->send(new DirectJobApply($listing, $apply));
 
 		return response()->json(['status' => 'ok']);
 	}
 
-    public function download()
+    public function download(Request $request)
     {
-	    $fileName = 'Rath_Cover letter_Tour  Operator.pdf';
-	    $fileLocation = 'uploads/'. $fileName;
+    	$id = decrypt($request->hash);
+
+    	$file = File::find($id);
+
+	    $fileName = $file->name;
+	    $fileLocation = $file->path;
 
 	    if(Storage::disk('s3')->exists($fileLocation)){
 	        return Storage::download($fileLocation, $fileName);
