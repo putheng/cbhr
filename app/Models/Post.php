@@ -21,6 +21,17 @@ class Post extends Model
     {
         return ($this->views * $this->ecmp);
     }
+
+    public function getTotalViewThisMonthAttribute()
+    {
+        return PostView::select('post_views.id')
+        ->join('posts', 'post_views.post_id', '=', 'posts.id')
+        ->join('users', 'posts.user_id', '=', 'users.id')
+        ->where('users.id', auth()->id())
+        ->whereYear('post_views.created_at', date('Y'))
+        ->whereMonth('post_views.created_at', date('m'))
+        ->count();
+    }
     
     public function getTotalViewsAttribute()
     {

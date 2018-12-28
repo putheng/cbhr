@@ -7,13 +7,13 @@
 			<div class="row wrapper text-center">
 				<div class="col-xs-6 col-md-3 b-r b-light">
 					<span class="h3 text-danger font-bold m-t m-b-xs block">
-						{{ $post->sum('views') }}
+						{{ $posts->totalViewThisMonth }}
 					</span>
 					<small class="h5 text-muted m-b help-block">Views</small>
 				</div>
 				<div class="col-xs-6 col-md-3 b-r b-light">
 					<span class="h3 text-danger font-bold m-t m-b-xs block">
-						${{ ($post->sum('views') * $posts->ecmp) }}
+						${{ ($posts->totalViewThisMonth * $posts->ecmp) }}
 					</span>
 					<small class="h5 text-muted m-b help-block">Earnings</small>
 					
@@ -73,8 +73,8 @@
                 },
                 tooltips: {
                     callbacks: {
-    					label: function(tooltipItems, data) { 
-                            return 'Click:'+ tooltipItems.yLabel + '; Earn: '+ (tooltipItems.yLabel * {{ $posts->ecmp }})+'$' ;
+    					label: function(tooltipItems, data) {
+                            return 'Click:'+ tooltipItems.yLabel + '; Earn: '+ (tooltipItems.yLabel * {{ $posts->ecmp }}).toFixed(3) +'$' ;
                         }
     				},
                     mode: 'index',

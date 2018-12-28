@@ -33,7 +33,7 @@ class FileController extends Controller
 			$file->update(['apply_id' => $apply->id]);
 		}
 
-		Mail::to('contact@cambodiahr.com')->send(new DirectJobApply($listing, $apply));
+		Mail::to($listing->user)->send(new DirectJobApply($listing, $apply));
 
 		return response()->json(['status' => 'ok']);
 	}

@@ -109,6 +109,12 @@
 										<td>{{ $listing->company->phone }}</td>
 									</tr>
 									<tr>
+										<td><b>Email</b></td>
+										<td>
+											<div>{!! email_protected($listing->user->email) !!}</div>
+										</td>
+									</tr>
+									<tr>
 										<td><b>Address</b></td>
 										<td>{{ $listing->company->address }}</td>
 									</tr>

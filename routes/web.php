@@ -1,13 +1,19 @@
 <?php
-use App\Models\Apply;
-
 
 Route::get('/test', function(){
-    $apply = Apply::find(10);
+    $view = new App\Models\PostView;
 
-    $apply->files;
+    $query = $view->select('post_views.id')
+        ->join('posts', 'post_views.post_id', '=', 'posts.id')
+        ->join('users', 'posts.user_id', '=', 'users.id')
+        ->where('users.id', auth()->id())
+        ->whereYear('post_views.created_at', date('Y'))
+        ->whereMonth('post_views.created_at', date('m'))
+        ->count();
 
-    return response('ok', 200);
+    dd($query);
+    //return response('ok', 200);
+
 });
 
 Route::group(['prefix' => 'file', 'namespace' => 'File', 'as' => 'file.'], function(){

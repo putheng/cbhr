@@ -10,7 +10,7 @@
 <link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
 <link rel="shortcut icon" href="/images/my-logo-3.png">
 <link href="/css/bootstrap.css" rel='stylesheet' type='text/css'>
-<link href="/css/main.css" rel='stylesheet' type='text/css'>
+<link href="/css/main.css?v=1" rel='stylesheet' type='text/css'>
 <script src="/js/jquery-1.11.1.min.js"></script>
 <script type="text/javascript" src="/js/bootstrap.min.js"></script>
 <meta name="csrf-token" content="{{ csrf_token() }}">

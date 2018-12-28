@@ -30,21 +30,28 @@ class ListingController extends Controller
         try{
             $explode = explode('-', decrypt($request->token));
 
-            $post = Post::where([
+            $postCheck = Post::where([
                 'user_id' => $explode[1],
                 'listing_id' => $explode[0]
             ])->first();
 
-            if((bool)$post && checkLoadToken($request->loadToken)){
-                $post->increment('views');
-
-                $view = new PostView;
-                $view->agent = $request->header('User-Agent');
-                $view->post()->associate($post);
-                $view->save();
-                
-                return 'ok';
+            if((bool)$postCheck && checkLoadToken($request->loadToken)){
+                $postCheck->increment('views');
+            }else{
+                $post = new Post;
+                $post->user_id = $explode[1];
+                $post->listing_id = $explode[0];
+                $post->postid = $request->token;
+                $post->save();
             }
+
+            $view = new PostView;
+            $view->agent = $request->header('User-Agent');
+            $view->post()->associate($post);
+            $view->save();
+            
+            return 'ok';
+
         }catch(DecryptException $e){
             // dd($e->getMessage());
         }

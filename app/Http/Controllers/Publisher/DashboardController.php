@@ -10,7 +10,12 @@ class DashboardController extends Controller
 {
     public function index(Request $request)
     {
-        $post = $request->user()->post;
+
+        // $post = $request->user()
+        //     ->post()
+        //     ->whereMonth('created_at', '=', date('m'))
+        //     ->get();
+
         $posts = new Post;
         
         return view('publisher.index', compact('post', 'posts'));
