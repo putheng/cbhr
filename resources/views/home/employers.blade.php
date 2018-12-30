@@ -68,7 +68,7 @@
 							</p>
 							<p>
 								<span class="glyphicon glyphicon-globe"></span>
-								<a href="{{ $company->website }}" rel="nofollow" target="_blank">
+								<a href="//{{ $company->website }}" rel="nofollow" target="_blank">
 									{{ $company->website }}
 								</a>
 							</p>

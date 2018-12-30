@@ -15,7 +15,7 @@
 				<ul class="nav navbar-nav navbar-right">
 					<li class="dropdown">
 						<a href="#" class="dropdown-toggle avatar" data-toggle="dropdown">
-						<img src="{{ request()->user()->avatarPath() != null ? request()->user()->avatarPath() : '/images/company-placeholder-300x300.png' }}">
+						<img src="{{ request()->user()->avatarPath() != null ? request()->user()->avatarPath() : '/images/company-placeholder.png' }}">
 						</a>
 						<ul class="dropdown-menu">
 							<li class="dropdown-menu-header text-center">
