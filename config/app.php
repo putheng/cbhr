@@ -169,6 +169,7 @@ return [
         Barryvdh\Debugbar\ServiceProvider::class,
         Jenssegers\Agent\AgentServiceProvider::class,
         Laravel\Socialite\SocialiteServiceProvider::class,
+        Spatie\Fractal\FractalServiceProvider::class,
 
         //
 

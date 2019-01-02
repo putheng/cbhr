@@ -9,50 +9,35 @@
 			@include ('users.employer.listing.partials.alert')
 			<div class="well1 white">
 			    <div class="table-responsive">
-    				<table class="table">
-    					<thead>
-    						<tr>
-    							<th>ID</th>
-    							<th>Title</th>
-    							<th>View</th>
-    							<th>Earn</th>
-    							<th class="text-center">Action</th>
-    						</tr>
-    					</thead>
-    					<tbody>
-    						@if($posts->count())
-    							@foreach($posts as $post)
-    								<tr>
-    									<td>{{ $post->id }}</td>
-    									<td>
-                                            <a target="_blank" 
-                                                href="{{ route('listing.show', $post->listing) }}">
-                                                    {{ $post->listing->title }}
-                                            <a/>
-                                        </td>
-    									<td>
-    										<a href="#">{{ $post->views }}</a>
-    									</td>
-    									<td>
-    										${{ $post->earn() }}
-    									</td>
-    									<td class="text-center">
-    									    <a onclick="postToFeed('{{ route('listing.show', $post->listing) }}?token={{ encrypt($post->listing->id .'-'. auth()->id()) }}', '{{ $post->id }}');" href="#" class="btn btn-info btn-sm">Post again</a>
-	    									<form class="hidden" action="{{ route('publisher.promote.store', [$post->listing]) }}" method="post" id="listings-post-form-{{ $post->id }}">
-											    {{ csrf_field() }}
-											</form>
-    									</td>
-    								</tr>
-    							@endforeach
-    						@else
-    							<tr>
-    								<td class="text-center" colspan="6">
-    									<span>No listings found.</span>
-    								</td>
-    							</tr>
-    						@endif
-    					</tbody>
-    				</table>
+					@if($posts->count())
+						@foreach($posts as $post)
+                        <div class="media">
+                            <div class="media-left">
+                                <div class="media-left">
+                                    <img width="60" class="media-object" 
+                                    src="{{ $post->listing->company->avatarPath() }}"
+                                    alt="{{ $post->listing->company->name }}">
+                                </div>
+                                <div class="media-body">
+                                    <h5>{{ $post->listing->title }}</h5>
+                                    <span class="glyphicon glyphicon-equalizer" aria-hidden="true"></span>
+                                        <span>{{ $post->listing->company->name }}</span>,
+                                        <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>
+                                        <span>{{ $post->listing->area->name }}</span>
+                                </div>
+                                <div class="medai-right">
+                                    <form class="hidden" action="{{ route('publisher.promote.store', [$post->listing]) }}" method="post" id="listings-post-form-{{ $post->id }}">
+                                        {{ csrf_field() }}
+                                    </form>
+                                </div>
+                            </div>
+                            
+                        </div>
+							
+						@endforeach
+					@else
+						<p><span>No listings found.</span></p>
+					@endif
 				</div><br>
 				<div class="text-right">
 				    {{ $posts->links() }}

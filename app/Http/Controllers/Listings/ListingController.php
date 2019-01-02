@@ -19,9 +19,8 @@ class ListingController extends Controller
     
     public function show(Request $request, Listing $listing)
     {
-        if($request->query('ref')){
-            $listing->increment('views');
-        }
+        $listing->increment('views');
+        
         return view('home.listing', compact('listing'));
     }
 
@@ -30,13 +29,13 @@ class ListingController extends Controller
         try{
             $explode = explode('-', decrypt($request->token));
 
-            $postCheck = Post::where([
+            $post = Post::where([
                 'user_id' => $explode[1],
                 'listing_id' => $explode[0]
             ])->first();
 
-            if((bool)$postCheck && checkLoadToken($request->loadToken)){
-                $postCheck->increment('views');
+            if((bool)$post && checkLoadToken($request->loadToken)){
+                $post->increment('views');
             }else{
                 $post = new Post;
                 $post->user_id = $explode[1];
@@ -49,6 +48,8 @@ class ListingController extends Controller
             $view->agent = $request->header('User-Agent');
             $view->post()->associate($post);
             $view->save();
+
+            $post->user()->increment('usd', $post->ecmp);
             
             return 'ok';
 

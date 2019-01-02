@@ -6,7 +6,7 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="{{ route('home.index') }}">
+					<a class="navbar-brand" href="{{ route('publisher.index') }}">
 						<i class="fa fa-home"></i>
 						Dashboard
 					</a>
@@ -31,7 +31,7 @@
 								<a href="{{ route('publisher.withdraw.index') }}">
 									<i class="fa fa-usd"></i>
 									Available Earnings
-									<span class="label label-default">${{ number_format(auth()->user()->usd, 2) }}</span>
+									<span class="label label-default">${{ number_format(auth()->user()->usd, 3) }}</span>
 								</a>
 							</li>
 							<li class="m_2">

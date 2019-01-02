@@ -1,21 +1,5 @@
 <?php
 
-Route::get('/test', function(){
-    $view = new App\Models\PostView;
-
-    $query = $view->select('post_views.id')
-        ->join('posts', 'post_views.post_id', '=', 'posts.id')
-        ->join('users', 'posts.user_id', '=', 'users.id')
-        ->where('users.id', auth()->id())
-        ->whereYear('post_views.created_at', date('Y'))
-        ->whereMonth('post_views.created_at', date('m'))
-        ->count();
-
-    dd($query);
-    //return response('ok', 200);
-
-});
-
 Route::group(['prefix' => 'file', 'namespace' => 'File', 'as' => 'file.'], function(){
 
     Route::get('upload', 'UploadController@index')->name('upload');
@@ -111,8 +95,8 @@ Route::group(['middleware' => ['auth', 'role:publisher'], 'prefix' => 'publisher
     /* publisher/promote */
     Route::group(['prefix' => 'promote', 'as' => 'promote.'], function(){
         Route::get('/', 'PostController@index')->name('index');
-        Route::get('/create', 'PostController@create')->name('create');
-        Route::post('/create/{listing}', 'PostController@store')->name('store');
+        Route::get('/new', 'PostController@create')->name('create');
+        Route::post('/new/{listing}', 'PostController@store')->name('store');
     });
     
     /* publisher/payment */
@@ -315,17 +299,5 @@ Route::group(['prefix' => 'jobseeker', 'namespace' => 'JobSeeker', 'as' => 'seek
         Route::get('/create', 'ResumeController@create')->name('create');
     });
 
-});
-
-/**
- * Listing Api
- * 
- **/
-
-Route::group(['prefix' => 'api/v3', 'namespace' => 'Api'], function(){
-    Route::get('listings', 'ListingController@listing');
-    Route::get('listing/{listing}', 'ListingController@index');
-
-    Route::get('json', 'ListingController@json');
 });
 

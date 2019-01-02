@@ -24,17 +24,6 @@ class Listing extends Model
     protected $hidden = [
         'company', 'area', 'salary', 'term'
     ];
-    
-    protected $appends = [
-        'companyName',
-        'companyLogo',
-        'mainArea',
-        'childArea',
-        'formatedSalary',
-        'formatedTerm',
-        'formatedDescription',
-        'formatedCreatedAt'
-    ];
 
     public function getRouteKeyName()
     {

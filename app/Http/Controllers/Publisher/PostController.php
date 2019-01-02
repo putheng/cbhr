@@ -21,9 +21,9 @@ class PostController extends Controller
     {
         $posts = $request->user()->post()->pluck('listing_id')->all();
         
-        $listings = listing::with(['area'])->notPosted($posts)
+        $listings = listing::with(['area', 'company', 'salary'])->notPosted($posts)
         ->isNotExpired()->isLive()
-        ->latestFirst()->paginate(15);
+        ->latestFirst()->paginate(10);
         
         $listings->setPath('');
         

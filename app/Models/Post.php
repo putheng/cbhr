@@ -15,7 +15,7 @@ class Post extends Model
     
     protected $fillable = ['postid'];
     
-    public $ecmp = 0.003;
+    public $ecmp = 0.002;
     
     public function earn()
     {
