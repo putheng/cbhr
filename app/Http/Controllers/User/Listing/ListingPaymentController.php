@@ -33,6 +33,10 @@ class ListingPaymentController extends Controller
             $listing->live = true;
             $listing->created_at = Carbon::now();
             $listing->expires_at = new Carbon('+30 day');
+
+            if(request('submitValue') > 0){
+                $listing->premium = 1;
+            }
             
             $listing->save();
 

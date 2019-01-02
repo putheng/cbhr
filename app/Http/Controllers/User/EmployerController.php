@@ -10,11 +10,12 @@ class EmployerController extends Controller
 {
     public function index(Request $request)
     {
-        $listings = Listing::with(['area', 'category'])->latestFirst()->paginate(10);
+        $listings = $request->user()
+        		->listings()
+        		->with(['area', 'category'])
+        		->latestFirst()->paginate(10);
         
         $company = $request->user()->company;
-        
-        //dd($company->type);
         
         return view('users.employer.index', compact('listings', 'company'));
     }

@@ -2824,3 +2824,15 @@ ul.new {
     transform: rotate(360deg);
   }
 }
+
+label.control-label.avatar_upload_form {
+    display: inline-block;
+    position: relative;
+    border: 2px dashed #c5c5c5;
+    padding: 10px 50px;
+    border-radius: 3px;
+    background-color: #eeeeee9c;
+    cursor: pointer;
+    font-size: 20px;
+    color: #616161;
+}

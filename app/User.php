@@ -53,10 +53,20 @@ class User extends Authenticatable
     {
         return $this->usd >= $this->price;
     }
+
+    public function getPricingAttribute()
+    {
+        $price = (int) request('submitValue');
+
+        if($price > 0){
+            return $this->price;
+        }
+        return 0;
+    }
     
     public function payListing()
     {
-        $usd = ($this->usd - $this->price);
+        $usd = ($this->usd - $this->pricing);
         
         if($usd <= 0){
             return false;
