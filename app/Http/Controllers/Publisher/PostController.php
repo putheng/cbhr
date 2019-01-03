@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class PostController extends Controller
-{   
+{
     public function index(Request $request)
     {
         $posts =$request->user()->post()->with('listing')->latestFirst()->paginate(15);

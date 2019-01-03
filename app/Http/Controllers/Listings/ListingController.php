@@ -26,32 +26,41 @@ class ListingController extends Controller
 
     public function adsCount(Request $request)
     {
+        $urgent = $request->header('User-Agent');
+        $explode = explode('-', decrypt($request->token));
+
         try{
-            $explode = explode('-', decrypt($request->token));
 
-            $post = Post::where([
-                'user_id' => $explode[1],
-                'listing_id' => $explode[0]
-            ])->first();
+            if(strpos($urgent, 'FBLC') !== false 
+                && auth()->guest() 
+                || auth()->id() != $explode[1]){
 
-            if((bool)$post && checkLoadToken($request->loadToken)){
-                $post->increment('views');
-            }else{
-                $post = new Post;
-                $post->user_id = $explode[1];
-                $post->listing_id = $explode[0];
-                $post->postid = $request->token;
-                $post->save();
-            }
+                $post = Post::where([
+                    'user_id' => $explode[1],
+                    'listing_id' => $explode[0]
+                ])->first();
 
-            $view = new PostView;
-            $view->agent = $request->header('User-Agent');
-            $view->post()->associate($post);
-            $view->save();
+                if((bool)$post && checkLoadToken($request->loadToken)){
+                    $post->increment('views');
+                }else{
+                    $post = new Post;
+                    $post->user_id = $explode[1];
+                    $post->listing_id = $explode[0];
+                    $post->postid = $request->token;
+                    $post->save();
+                }
 
-            $post->user()->increment('usd', $post->ecmp);
+
+                $view = new PostView;
+                $view->agent = $urgent;
+                $view->post()->associate($post);
+                $view->save();
+
+                $post->user()->increment('usd', $post->ecmp);
             
-            return 'ok';
+                return 'ok';
+            }
+            
 
         }catch(DecryptException $e){
             // dd($e->getMessage());

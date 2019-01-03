@@ -15,7 +15,7 @@ class CreatePostViewsTable extends Migration
     {
         Schema::create('post_views', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('agent');
+            $table->text('agent')->nullable();
             $table->integer('post_id')->unsigned();
             $table->timestamps();
 

@@ -23,12 +23,8 @@
                                     <span class="glyphicon glyphicon-equalizer" aria-hidden="true"></span>
                                         <span>{{ $post->listing->company->name }}</span>,
                                         <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>
-                                        <span>{{ $post->listing->area->name }}</span>
-                                </div>
-                                <div class="medai-right">
-                                    <form class="hidden" action="{{ route('publisher.promote.store', [$post->listing]) }}" method="post" id="listings-post-form-{{ $post->id }}">
-                                        {{ csrf_field() }}
-                                    </form>
+                                        <span>{{ $post->listing->area->name }}</span>,
+                                        <span>Views: {{ $post->views }}</span>
                                 </div>
                             </div>
                             
